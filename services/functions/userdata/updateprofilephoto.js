@@ -1,0 +1,33 @@
+import AWS from "aws-sdk";
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
+export const main = async (event) => {
+  const data = JSON.parse(event.body);
+
+  const params = {
+    TableName: "harsh-gym-User",
+    Key: {
+      userId: "12",
+    },
+    UpdateExpression: "SET profilePhotoS3 = :profilePhotoS3",
+    ExpressionAttributeValues: {
+      ":profilePhotoS3": data.profilePhotoS3 || null,
+    },
+    ReturnValues: "ALL_NEW",
+  };
+
+  try {
+    const result = await dynamoDb.update(params).promise();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: e.message }),
+    };
+  }
+};
