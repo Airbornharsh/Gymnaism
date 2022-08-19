@@ -11,25 +11,28 @@ export function StorageStack({ stack, app }) {
 
   const WorkoutTable = new Table(stack, "Workout", {
     fields: {
+      page: "number",
       workoutId: "string",
     },
-    primaryIndex: { partitionKey: "workoutId" },
+    primaryIndex: { partitionKey: "page", sortKey: "workoutId" },
   });
 
   //Hard coded Course table
   const CourseTable = new Table(stack, "Course", {
     fields: {
+      page: "number",
       courseId: "string",
     },
-    primaryIndex: { partitionKey: "courseId" },
+    primaryIndex: { partitionKey: "page", sortKey: "courseId" },
   });
 
   //Hard coded Video Table
   const VideoTable = new Table(stack, "Video", {
     fields: {
+      page: "number",
       videoId: "string",
     },
-    primaryIndex: { partitionKey: "videoId" },
+    primaryIndex: { partitionKey: "page", sortKey: "videoId" },
   });
 
   //Hard Coded MemberShip Tier
@@ -48,10 +51,6 @@ export function StorageStack({ stack, app }) {
     },
     primaryIndex: { partitionKey: "userId", sortKey: "orderId" },
   });
-
-  stack.addOutputs({
-    userTableName: UserTable.tableName,
-  })
 
   return {
     UserTable,

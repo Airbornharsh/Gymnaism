@@ -23,6 +23,10 @@ export const main = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify(result),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
     };
   } catch (e) {
     return {

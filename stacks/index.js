@@ -1,7 +1,7 @@
-import { MyStack } from "./MyStack";
 import { StorageStack } from "./StorageStack";
-import { App } from "@serverless-stack/resources";
 import { ApiStack } from "./ApiStack";
+import { AuthStack } from "./AuthStack";
+import { FrontendStack } from "./FrontendStack";
 
 export default function (app) {
   app.setDefaultFunctionProps({
@@ -11,5 +11,5 @@ export default function (app) {
       format: "esm",
     },
   });
-  app.stack(MyStack).stack(StorageStack).stack(ApiStack);
+  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
 }

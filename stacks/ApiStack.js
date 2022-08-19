@@ -13,7 +13,7 @@ export function ApiStack({ stack, app }) {
 
   const userApi = new Api(stack, "UserApi", {
     defaults: {
-      // authorizer: "iam",
+      authorizer: "iam",
       function: {
         permissions: [
           UserTable,
@@ -26,8 +26,6 @@ export function ApiStack({ stack, app }) {
       },
     },
     routes: {
-      "GET /": "functions/check.main",
-
       //user data
       "POST /userdata": "functions/userdata/create.main",
       "GET /userdata": "functions/userdata/get.main",
@@ -44,19 +42,34 @@ export function ApiStack({ stack, app }) {
       "PUT /userdata/orders": "functions/userdata/updateorders.main",
       "PUT /userdata/workouts": "functions/userdata/updateworkouts.main",
 
-      //membership courses
-      "GET /membership/courses/{id}": "functions/membership/coursesget.main", 
+      //membership Data Call
+      "GET /membership/courses/{id}": "functions/membership/coursesget.main",
+      "GET /membership/videos/{id}": "functions/membership/videosget.main",
+
+      //course Data
+      "GET /membership/video/{id}": "functions/membership/video/get.main",
+      "GET /membership/course/{id}": "functions/membership/course/get.main",
     },
   });
 
   const AnyApi = new Api(stack, "Api", {
     defaults: {
-      // authorizer: "iam",
       function: {
         permissions: [WorkoutTable, VideoTable, CourseTable, MembershipTable],
       },
     },
-    routes: {},
+    routes: {
+      "GET /": "functions/check.main",
+
+      //courses
+      "GET /courses": "functions/anyone/courses/list.main",
+
+      //courses
+      "GET /videos": "functions/anyone/videos/list.main",
+
+      //workouts
+      "GET /workouts": "functions/anyone/workouts/list.main",
+    },
   });
 
   stack.addOutputs({
@@ -66,6 +79,6 @@ export function ApiStack({ stack, app }) {
 
   return {
     userApi,
-    Api,
+    AnyApi,
   };
 }
