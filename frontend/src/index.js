@@ -4,6 +4,7 @@ import { Amplify } from "aws-amplify";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import ContextProvider from "./Context/ContextProvider";
 
 Amplify.configure({
   Auth: {
@@ -16,12 +17,12 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "gym",
+        name: "any",
         endpoint: "https://x2m5uo1i68.execute-api.us-east-1.amazonaws.com",
         region: "us-east-1",
       },
       {
-        name: "gym",
+        name: "user",
         endpoint: "https://pppy3ebfx7.execute-api.us-east-1.amazonaws.com",
         region: "us-east-1",
       },
@@ -32,8 +33,10 @@ Amplify.configure({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ContextProvider>
+      <Router>
+        <App />
+      </Router>
+    </ContextProvider>
   </React.StrictMode>
 );

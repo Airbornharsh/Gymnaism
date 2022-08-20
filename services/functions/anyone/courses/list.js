@@ -3,6 +3,7 @@ import AWS from "aws-sdk";
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const main = async (event) => {
+  // console.log(event);
   const params = {
     TableName: "harsh-gym-Course",
     KeyConditionExpression: "page = :page",
@@ -13,7 +14,6 @@ export const main = async (event) => {
 
   try {
     const result = await dynamoDb.query(params).promise();
-    console.log(result);
 
     return {
       statusCode: 200,

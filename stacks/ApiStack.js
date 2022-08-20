@@ -26,6 +26,8 @@ export function ApiStack({ stack, app }) {
       },
     },
     routes: {
+      "GET /": "functions/check.main",
+
       //user data
       "POST /userdata": "functions/userdata/create.main",
       "GET /userdata": "functions/userdata/get.main",
@@ -59,8 +61,6 @@ export function ApiStack({ stack, app }) {
       },
     },
     routes: {
-      "GET /": "functions/check.main",
-
       //courses
       "GET /courses": "functions/anyone/courses/list.main",
 

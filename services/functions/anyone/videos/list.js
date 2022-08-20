@@ -20,6 +20,7 @@ export const main = async (event) => {
         description: Item.description,
         name: Item.name,
         imageS3: Item.imageS3,
+        duration: Item.duration,
         by: Item.by,
       };
     });

@@ -5,16 +5,17 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 export async function main(event) {
   // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
+  console.log(data);
 
   const params = {
     TableName: "harsh-gym-User",
     Item: {
-      userId: "12",
+      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       emailId: data.emailId,
       firstName: data.firstName,
       lastName: data.lastName,
       phoneNumber: data.phoneNumber,
-      profilePhotoS3: data.profilePhotoS3,
+      profilePhotoS3: data.profilePhotoS3 ,
       membershipId: null,
       courses: [],
       videos: [],

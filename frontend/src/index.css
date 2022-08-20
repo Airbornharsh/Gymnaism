@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.ok {
-  background-color: red;
+*::-webkit-scrollbar{
+  width: 0;
 }
