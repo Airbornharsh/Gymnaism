@@ -7,7 +7,7 @@ import Return from "../utils/Svgs/Return.svg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const UserCtx = useContext(Context);
+  const UserCtx = useContext(Context).user;
   // const [isValid, setIsValid] = useState(false);
 
   const Navigate = useNavigate();

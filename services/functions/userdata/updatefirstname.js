@@ -8,7 +8,7 @@ export const main = async (event) => {
   const params = {
     TableName: "harsh-gym-User",
     Key: {
-      userId: "12",
+      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
     },
     UpdateExpression: "SET firstName = :firstName",
     ExpressionAttributeValues: {

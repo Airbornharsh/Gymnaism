@@ -13,7 +13,8 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmationCode, setConfirmationCode] = useState("");
   const [newUser, setNewUser] = useState(null);
-  const UserCtx = useContext(Context);
+  const [isLogged, setIsLogged] = useState();
+  const UserCtx = useContext(Context).user;
 
   const Navigate = useNavigate();
 
@@ -56,7 +57,6 @@ const SignUp = () => {
           profilePhotoS3: "Photo",
         },
       });
-      console.log(data);
       UserCtx.setIsLogged(true);
       Navigate("/");
     } catch (e) {

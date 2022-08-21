@@ -1,6 +1,7 @@
 import { Auth } from "aws-amplify";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from "../Context/Context";
 
 const NavBar = () => {
   const [homeActive, setHomeActive] = useState(
@@ -9,6 +10,9 @@ const NavBar = () => {
   const [featuresActive, setFeaturesActive] = useState("");
   const [reviewsActive, setReviewsActive] = useState("");
   const [aboutUsActive, setAboutUsActive] = useState("");
+  const UserCtx = useContext(Context).user;
+  const UserDataCtx = useContext(Context).userdata;
+  const NavHandle = useRef();
 
   const Navigate = useNavigate();
 
@@ -34,7 +38,31 @@ const NavBar = () => {
       setReviewsActive("text-Color4");
       setAboutUsActive("text-Color2 border-b-2 border-Color3");
     }
+
+    NavHandle.current.style.display = "none";
   }, []);
+
+  const DisplayNavHandle = () => {
+    console.log(UserDataCtx.userData);
+    if (NavHandle.current.style.display === "block") {
+      NavHandle.current.style.display = "none";
+    } else {
+      NavHandle.current.style.display = "block";
+    }
+  };
+
+  const ProfileHandler = async () => {
+    Navigate("/profile");
+  };
+
+  const LogOutHandler = async () => {
+    try {
+      await Auth.signOut();
+      UserCtx.setIsLogged(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const HomeNavigation = () => {
     Navigate("/");
@@ -95,7 +123,7 @@ const NavBar = () => {
               About Us
             </li>
             <li>
-              {false ? (
+              {UserCtx.isLogged ? (
                 <button
                   className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1"
                   onClick={SignUpNavigation}
@@ -103,19 +131,34 @@ const NavBar = () => {
                   Get Started
                 </button>
               ) : (
-                <button
-                  className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1"
-                  onClick={async () => {
-                    try {
-                      await Auth.signOut();
-                      console.log("Out");
-                    } catch (e) {
-                      console.log.log(e);
-                    }
-                  }}
+                <div
+                  className="bg-Color3 rounded-[50%] w-8 h-8 relative cursor-pointer"
+                  onClick={DisplayNavHandle}
                 >
-                  LogOut
-                </button>
+                  <ul
+                    ref={NavHandle}
+                    className="absolute flex flex-col items-center justify-center border-black top-8 right-2 text-Color1"
+                  >
+                    <li
+                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                      onClick={ProfileHandler}
+                    >
+                      Profile
+                    </li>
+                    <li className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer">
+                      My Sessions
+                    </li>
+                    <li className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer">
+                      My Videos
+                    </li>
+                    <li
+                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
+                      onClick={LogOutHandler}
+                    >
+                      Log Out
+                    </li>
+                  </ul>
+                </div>
               )}
             </li>
           </ul>

@@ -1,16 +1,16 @@
 import { API } from "aws-amplify";
 import React, { useEffect, useState } from "react";
- 
-const Courses = () => { 
+import { useNavigate } from "react-router-dom";
+
+const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     const data = async () => {
       try {
         const coursesData = await API.get("any", "/courses");
-         await API.get("user", "/");
-        console.log(coursesData);
-        // setCourses(coursesData);  
+        setCourses(coursesData);
       } catch (e) {
         console.log(e);
       }
@@ -28,6 +28,9 @@ const Courses = () => {
             <li
               key={course.courseId}
               className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4"
+              onClick={() => {
+                Navigate(`/course/${course.courseId}`);
+              }}
             >
               <div className="flex flex-col items-center justify-start mt-3">
                 <h3 className="text-[1.3rem] font-semibold text-Color1">

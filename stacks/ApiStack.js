@@ -35,6 +35,7 @@ export function ApiStack({ stack, app }) {
       "PUT /userdata/firstname": "functions/userdata/updatefirstname.main",
       "PUT /userdata/lastname": "functions/userdata/updatelastname.main",
       "PUT /userdata/phonenumber": "functions/userdata/updatephonenumber.main",
+      "PUT /userdata/basic": "functions/userdata/updatebasicuserdata.main",
       "PUT /userdata/profilephoto":
         "functions/userdata/updateprofilephoto.main",
       "PUT /userdata/membershipid":
@@ -63,9 +64,11 @@ export function ApiStack({ stack, app }) {
     routes: {
       //courses
       "GET /courses": "functions/anyone/courses/list.main",
+      "GET /course/{courseId}": "functions/anyone/courses/get.main",
 
-      //courses
+      //Videos
       "GET /videos": "functions/anyone/videos/list.main",
+      "GET /video/{videoId}": "functions/anyone/videos/get.main",
 
       //workouts
       "GET /workouts": "functions/anyone/workouts/list.main",
