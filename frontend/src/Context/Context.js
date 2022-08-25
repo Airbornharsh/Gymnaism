@@ -6,8 +6,6 @@ const Context = createContext({
     setIsLogged: () => {},
     isLogging: false,
     setIsLogging: () => {},
-    userId: "",
-    setUserId: () => {},
   },
   userdata: {
     createdAt: null,
@@ -33,8 +31,14 @@ const Context = createContext({
     setVideos: () => {},
     workouts: [],
     setWorkouts: () => {},
+    courses: [],
+    setCourses: () => {},
     userData: {},
     setUserData: () => {},
+  },
+  util: {
+    loader: "",
+    setLoader: () => {},
   },
 });
 

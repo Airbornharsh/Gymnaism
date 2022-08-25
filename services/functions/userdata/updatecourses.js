@@ -10,16 +10,16 @@ export const main = async (event) => {
 
     const data = JSON.parse(event.body);
 
-    const courses = [...getData, { courseId: data.course }];
+    const courses = [...getData, data.courseId];
 
     const params = {
       TableName: "harsh-gym-User",
       Key: {
-        userId: "12",
+        userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       },
       UpdateExpression: "SET courses = :courses",
       ExpressionAttributeValues: {
-        ":courses": courses || getData,
+        ":courses": courses,
       },
       ReturnValues: "ALL_NEW",
     };

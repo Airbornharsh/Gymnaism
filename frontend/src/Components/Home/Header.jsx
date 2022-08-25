@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from "../../Context/Context";
 import pic from "../../utils/Svgs/Tredmill.svg";
 
 const Header = () => {
+  const UserCtx = useContext(Context).user;
+  const UserDataCtx = useContext(Context).userdata;
   const Navigate = useNavigate();
 
   const SignUpNavigation = () => {
@@ -22,7 +25,7 @@ const Header = () => {
           Exercise is the Key to a Healthy Lifestyle
         </p>
         <div className="mt-6">
-          {true ? (
+          {UserCtx.isLogged ? (
             <div>
               <button
                 className="bg-Color3 ml-3 py-[0.25rem] px-2 rounded text-center font-semibold text-Color1 w-[5rem]"
@@ -38,7 +41,15 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <p></p>
+            <span className="flex ">
+              <pre className="font-sans text-2xl font-semibold text-Color5">
+                Hello{" "}
+              </pre>
+              <p className="font-sans text-2xl font-semibold text-Color3">
+                {" "}
+                {UserDataCtx.userData.firstName}
+              </p>
+            </span>
           )}
         </div>
       </div>

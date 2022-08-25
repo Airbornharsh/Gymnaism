@@ -6,16 +6,16 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 export const main = async (event) => {
   try {
     const getMainData = await getMain(event);
-    const getData = JSON.parse(getMainData.body).courses;
+    const getData = JSON.parse(getMainData.body).videos;
 
     const data = JSON.parse(event.body);
 
-    const videos = [...getData, { courseId: data.video }];
+    const videos = [...getData, data.videoId];
 
     const params = {
       TableName: "harsh-gym-User",
       Key: {
-        userId: "12",
+        userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       },
       UpdateExpression: "SET videos = :videos",
       ExpressionAttributeValues: {

@@ -43,7 +43,6 @@ const NavBar = () => {
   }, []);
 
   const DisplayNavHandle = () => {
-    console.log(UserDataCtx.userData);
     if (NavHandle.current.style.display === "block") {
       NavHandle.current.style.display = "none";
     } else {
@@ -51,8 +50,16 @@ const NavBar = () => {
     }
   };
 
-  const ProfileHandler = async () => {
-    Navigate("/profile");
+  const ProfileHandler = () => {
+    Navigate(`/dashboard`);
+  };
+
+  const MyCoursesHandler = () => {
+    Navigate("/mycourses");
+  };
+
+  const MyVideosHandler = () => {
+    Navigate("/myvideos");
   };
 
   const LogOutHandler = async () => {
@@ -143,12 +150,18 @@ const NavBar = () => {
                       className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
                       onClick={ProfileHandler}
                     >
-                      Profile
+                      Dashboard
                     </li>
-                    <li className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer">
-                      My Sessions
+                    <li
+                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                      onClick={MyCoursesHandler}
+                    >
+                      My Courses
                     </li>
-                    <li className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer">
+                    <li
+                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                      onClick={MyVideosHandler}
+                    >
                       My Videos
                     </li>
                     <li

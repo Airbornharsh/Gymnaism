@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   width: 0;
+}
+
+.rotation {
+  animation: rotation 1s ease-in infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
 }

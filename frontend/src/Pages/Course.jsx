@@ -1,23 +1,31 @@
 import { API } from "aws-amplify";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../Layout/Footer";
 import NavBar from "../Layout/NavBar";
 import Return from "../utils/Svgs/Return.svg";
 import VideoElement from "../Components/VideoElement";
+import Context from "../Context/Context";
 
 const Course = () => {
   const [course, setCourse] = useState({ videos: [] });
+  const UtilCtx = useContext(Context).util;
+  const [loader, setLoader] = useState(false);
   const { courseId } = useParams();
   console.log(courseId);
 
   const Navigate = useNavigate();
 
+  UtilCtx.setLoader(loader);
+
   useEffect(() => {
     const done = async () => {
+      setLoader(true);
       try {
         const courseData = await API.get("any", `/course/${courseId}`);
+        console.log(courseData);  
         setCourse(courseData);
+        setLoader(false);
       } catch (e) {
         console.log(e);
       }
@@ -31,13 +39,13 @@ const Course = () => {
   };
 
   return (
-    <div className="bg-Color1 flex flex-col justify-center items-center">
+    <div className="flex flex-col bg-Color1">
       <NavBar />
-      <div className="min-h-[100vh] w-[90vw] max-w-[80rem] flex flex-col justify-start items-start pt-20">
+      <div className="min-h-[100vh] w-[90vw] max-w-[80rem] flex flex-col justify-start items-start pt-20 ml-[10rem]">
         <h2 className="text-Color3 text-[3rem]">Fat Loosen</h2>
-        <p className="text-Color4 pl-1">{course.description}</p>
+        <p className="pl-1 text-Color4">{course.description}</p>
 
-        <ul className="flex flex-col justify-center items-center pt-8">
+        <ul className="flex flex-col items-center justify-center pt-8">
           {course.videos.map((video) => {
             return <VideoElement key={video.videoId} videoId={video.videoId} />;
           })}

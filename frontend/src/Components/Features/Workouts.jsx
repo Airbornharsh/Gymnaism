@@ -10,7 +10,6 @@ const Workouts = () => {
     const data = async () => {
       try {
         const workoutsData = await API.get("any", "/workouts");
-        console.log(workoutsData);
         setWorkouts(workoutsData);
       } catch (e) {
         console.log(e);

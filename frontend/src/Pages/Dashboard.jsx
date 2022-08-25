@@ -1,9 +1,16 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
 import dashboard from "../utils/Photo/dashboard.png";
 
 const Dashboard = () => {
   const UserDataCtx = useContext(Context).userdata;
+
+  const Navigate = useNavigate();
+
+  const editDashboardHandler = () => {
+    Navigate(`/dashboard/edit`);
+  };
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-Color1">
@@ -52,13 +59,27 @@ const Dashboard = () => {
           <li className="flex mt-2">
             <b className="text-Color1">Membership:</b>
             <p className="ml-2 text-Color4">
-             {UserDataCtx.userData.membershipId}
+              {UserDataCtx.userData.membershipId}
+            </p>
+          </li>
+          <li className="flex mt-2">
+            <b className="text-Color1">Joined At:</b>
+            <p className="ml-2 text-Color4">
+              {new Date(UserDataCtx.userData.createdAt).toLocaleDateString(
+                "en-us",
+                {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }
+              )}
             </p>
           </li>
         </ul>
         <button
           className="bg-Color3 py-[0.25rem] px-2 rounded text-center font-semibold text-Color1 w-[7rem] absolute bottom-4"
-          //   onClick={handleSubmit}
+          onClick={editDashboardHandler}
         >
           Edit Profile
         </button>

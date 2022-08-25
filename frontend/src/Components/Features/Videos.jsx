@@ -1,9 +1,12 @@
 import { API } from "aws-amplify";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Context from "../../Context/Context";
 import pic from "../../utils/Photo/videoCheck.jpg";
+import UserDataContextUpdater from "../../utils/UserDataContextUpdater";
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
+  const UtilCtx = useContext(Context).util;
 
   useEffect(() => {
     const data = async () => {
@@ -38,7 +41,24 @@ const Videos = () => {
                   {video.duration}
                 </p>
               </div>
-              <button className="px-5 py-[0.25rem] rounded-md  bg-Color1 text-Color5 mb-3">
+              <button
+                className="px-5 py-[0.25rem] rounded-md  bg-Color1 text-Color5 mb-3"
+                onClick={async () => {
+                  console.log("Started");
+                  UtilCtx.setLoader(true);
+                  try {
+                    const data = await API.put("user", "/userdata/videos", {
+                      body: {
+                        videoId: video.videoId,
+                      },
+                    });
+                    console.log(data);
+                    UtilCtx.setLoader(false);
+                  } catch (e) {
+                    console.log(e);
+                  }
+                }}
+              >
                 ADD
               </button>
             </li>
