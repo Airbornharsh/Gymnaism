@@ -7,6 +7,7 @@ export function ApiStack({ stack, app }) {
     WorkoutTable,
     VideoTable,
     CourseTable,
+    ReviewTable,
     MembershipTable,
     OrderTable,
   } = use(StorageStack);
@@ -20,6 +21,7 @@ export function ApiStack({ stack, app }) {
           WorkoutTable,
           VideoTable,
           CourseTable,
+          ReviewTable,
           MembershipTable,
           OrderTable,
         ],
@@ -58,7 +60,13 @@ export function ApiStack({ stack, app }) {
   const AnyApi = new Api(stack, "Api", {
     defaults: {
       function: {
-        permissions: [WorkoutTable, VideoTable, CourseTable, MembershipTable],
+        permissions: [
+          WorkoutTable,
+          VideoTable,
+          CourseTable,
+          ReviewTable,
+          MembershipTable,
+        ],
       },
     },
     routes: {
@@ -72,6 +80,10 @@ export function ApiStack({ stack, app }) {
 
       //workouts
       "GET /workouts": "functions/anyone/workouts/list.main",
+
+      //Reviews
+      "GET /reviews": "functions/anyone/reviews/list.main",
+
     },
   });
 

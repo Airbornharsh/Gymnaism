@@ -14,6 +14,13 @@ Amplify.configure({
     identityPoolId: "us-east-1:1c6c3156-94ad-47c4-b3f5-59b2c7da1a81",
     userPoolWebClientId: "29eskqsl1sliu28fjdo6852hqb",
   },
+  Storage: [
+    {
+      region: "us-east-1",
+      bucket: "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+      identityPoolId: "us-east-1:1c6c3156-94ad-47c4-b3f5-59b2c7da1a81",
+    },
+  ],
   API: {
     endpoints: [
       {

@@ -1,8 +1,8 @@
 import { API } from "aws-amplify";
 import React, { useContext, useEffect, useState } from "react";
+import { v1 as uuid1 } from "uuid";
 import Context from "../../Context/Context";
 import pic from "../../utils/Photo/videoCheck.jpg";
-import UserDataContextUpdater from "../../utils/UserDataContextUpdater";
 
 const Videos = () => {
   const [videos, setVideos] = useState([]);
@@ -12,7 +12,6 @@ const Videos = () => {
     const data = async () => {
       try {
         const videosData = await API.get("any", "/videos");
-        console.log(videosData);
         setVideos(videosData);
       } catch (e) {
         console.log(e);
@@ -25,14 +24,14 @@ const Videos = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-[6rem]">
       <h3 className="text-[3rem] mb-[4rem] font-semibold">Videos</h3>
-      <ul className="flex flex-wrap w-[100vw] max-w-[80rem] items-endjustify-start">
+      <ul className="flex flex-wrap w-[100vw] max-w-[80rem] items-end justify-start">
         {videos.map((video) => {
           return (
             <li
-              key={video.videoId}
+              key={uuid1()}
               className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4"
             >
-              <div className="flex flex-col items-center justify-start mt-3">
+              <div className="flex flex-col items-center justify-start ">
                 <img src={pic} alt="vI" className="h-[9rem] object-cover" />
                 <h3 className="text-[1.3rem] font-semibold text-Color4 pt-7">
                   {video.name}

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import Context from "../Context/Context";
 import Return from "../utils/Svgs/Return.svg";
 
@@ -8,9 +8,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const UserCtx = useContext(Context).user;
+  const UtilCtx = useContext(Context).util;
+  const UserDataCtx = useContext(Context).userdata;
   // const [isValid, setIsValid] = useState(false);
 
   const Navigate = useNavigate();
+
+  if (UserCtx.isLogged) {
+    Navigate("/");
+  }
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
@@ -18,13 +24,19 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    UtilCtx.setLoader(true);
+
     try {
       await Auth.signIn(email, password);
-      //   UserCtx.setIsLogged(true);
-      alert("Logged In");
+      const userdata = await API.get("user", "/userdata");
+      UserDataCtx.setUserData(userdata);
+      UserCtx.setIsLogged(true);
+      UtilCtx.setLoader(false);
+      Navigate("/");
     } catch (e) {
       console.log(e);
-      alert(e.message);
+      UtilCtx.setLoader(false);
     }
   };
 

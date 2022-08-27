@@ -1,42 +1,117 @@
-import { API } from "aws-amplify";
-import React, { useContext, useState } from "react";
+import { API, Storage } from "aws-amplify";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { BsFillPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
-import UserDataContextUpdater from "../utils/UserDataContextUpdater";
 
 const EditDashboard = () => {
-  const UserDataCtx = useContext(Context).userdata;
-  const [firstName, setFirstName] = useState(UserDataCtx.userData.firstName);
-  const [lastName, setLastName] = useState(UserDataCtx.userData.lastName);
+  const UserDataCtx = useRef(useContext(Context).userdata);
+  const UtilCtx = useRef(useContext(Context).util);
+  const [firstName, setFirstName] = useState(
+    UserDataCtx.current.userData.firstName
+  );
+  const [lastName, setLastName] = useState(
+    UserDataCtx.current.userData.lastName
+  );
   const [phoneNumber, setPhoneNumber] = useState(
-    UserDataCtx.userData.phoneNumber
+    UserDataCtx.current.userData.phoneNumber
   );
   const [gender, setGender] = useState("Male");
   const [address, setAddress] = useState(
     "611 N 2nd St,Philadelphia, Pennsylvania,United States"
   );
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState(
+    UserDataCtx.current.userData.profilePhotoS3
+  );
+  const file = useRef();
 
   const Navigate = useNavigate();
+
+  useEffect(() => {
+    UtilCtx.current.setLoader(true);
+
+    const onLoad = async () => {
+      try {
+        const profilePhotoUrl = await Storage.get(
+          `${UserDataCtx.current.userData.profilePhotoS3}`,
+          {
+            level: "private",
+            region: "us-east-1",
+            bucket:
+              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          }
+        );
+        setProfilePhotoUrl(profilePhotoUrl);
+        UtilCtx.current.setLoader(false);
+      } catch (e) {
+        console.log(e);
+        UtilCtx.current.setLoader(false);
+      }
+    };
+
+    onLoad();
+  }, []);
 
   const UpdateHandler = async (e) => {
     e.preventDefault();
 
+    UtilCtx.current.setLoader(true);
+
     try {
-      await API.put("user", "/userdata/basic", {
+      const filename = `${Date.now()}-${file.current.name}`;
+      const profilePhotoS3 = file.current
+        ? await Storage.put(`${filename}`, file.current, {
+            level: "private",
+            region: "us-east-1",
+            bucket:
+              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          })
+        : null;
+      await API.put("user", "/userdata/profilephoto", {
+        body: {
+          profilePhotoS3: profilePhotoS3.key,
+        },
+      });
+      const data = await API.put("user", "/userdata/basic", {
         body: {
           firstName: firstName,
           lastName: lastName,
           phoneNumber: phoneNumber,
         },
       });
-      UserDataContextUpdater();
+      console.log(data);
+      UtilCtx.current.setLoader(false);
       Navigate("/");
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <div className="flex justify-center w-screen h-screen bg-Color1">
       <form className="w-[80vw] max-w-[70rem] mt-[10rem] flex flex-col items-center">
+        <span className="relative">
+          <span className="absolute right-0 z-30 cursor-pointer">
+            <input
+              type="file"
+              ref={file}
+              className="cursor-pointer w-[1rem] h-[1rem] absolute z-20 opacity-0"
+              onChange={(event) => {
+                file.current = event.target.files[0];
+                setProfilePhotoUrl(URL.createObjectURL(file.current));
+                // setProfilePhotoUrl(file.current);
+              }}
+            />
+            <BsFillPencilFill color="#46AF72" />
+          </span>
+
+          <img
+            src={profilePhotoUrl}
+            alt="profile"
+            className="w-40 h-40 rounded-[50%] object-cover"
+          />
+        </span>
+
         <ul className="flex flex-wrap items-start justify-center">
           <li className="flex flex-col my-5 mx-7">
             <label className="text-Color3 ">First Name</label>

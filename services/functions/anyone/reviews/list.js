@@ -4,20 +4,21 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const main = async (event) => {
   const params = {
-    TableName: "harsh-gym-Video",
-    Key: {
-      page: 1,
-      videoId: event.pathParameters.id,
+    TableName: "harsh-gym-Review",
+    KeyConditionExpression: "page = :page",
+    ExpressionAttributeValues: {
+      ":page": 1,
     },
   };
 
   try {
-    const result = await dynamoDb.get(params).promise();
+    const result = await dynamoDb.query(params).promise();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result.Item),
-    };
+      body: JSON.stringify(result),
+      };
+      
   } catch (e) {
     return {
       statusCode: 500,

@@ -7,24 +7,22 @@ import NavBar from "../Layout/NavBar";
 import Return from "../utils/Svgs/Return.svg";
 import VideoElement from "../Components/VideoElement";
 import Context from "../Context/Context";
+import { useRef } from "react";
 
-const Course = () => {
+const MyCourse = () => {
   const [course, setCourse] = useState({ videos: [] });
-  const UtilCtx = useContext(Context).util;
-  const [loader, setLoader] = useState(false);
+  const UtilCtx = useRef(useContext(Context).util);
   const { courseId } = useParams();
 
   const Navigate = useNavigate();
 
-  UtilCtx.setLoader(loader);
-
   useEffect(() => {
     const done = async () => {
-      setLoader(true);
+      UtilCtx.current.setLoader(true);
       try {
         const courseData = await API.get("any", `/course/${courseId}`);
         setCourse(courseData);
-        setLoader(false);
+        UtilCtx.current.setLoader(false);
       } catch (e) {
         console.log(e);
       }
@@ -34,20 +32,20 @@ const Course = () => {
   }, [courseId]);
 
   const ReturnNavigation = () => {
-    Navigate("/");
+    Navigate("/mycourses");
   };
 
   return (
     <div className="flex flex-col bg-Color1">
       <NavBar />
       <div className="min-h-[100vh] w-[90vw] max-w-[80rem] flex flex-col justify-start items-start pt-20 ml-[10rem]">
-        <h2 className="text-Color3 text-[3rem]">Fat Loosen</h2>
+        <h2 className="text-Color3 text-[3rem]">{course.name}</h2>
         <p className="pl-1 text-Color4">{course.description}</p>
 
         <ul className="flex flex-col items-center justify-center pt-8">
           {course.videos.map((videoId) => {
             return (
-              <VideoElement key={uuid1()} videoId={videoId} Access="false" />
+              <VideoElement key={uuid1()} videoId={videoId} Access="true" />
             );
           })}
         </ul>
@@ -63,4 +61,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default MyCourse;

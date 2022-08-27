@@ -18,3 +18,19 @@
     transform: rotateZ(360deg);
   }
 }
+
+.slideLoader {
+  animation: slideLoader 1s ease-in infinite;
+}
+
+@keyframes slideLoader {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -13,21 +13,21 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmationCode, setConfirmationCode] = useState("");
   const [newUser, setNewUser] = useState(null);
-  const [isLogged, setIsLogged] = useState();
   const UserCtx = useContext(Context).user;
+  const UtilCtx = useContext(Context).util;
+  const UserDataCtx = useContext(Context).userdata;
 
   const Navigate = useNavigate();
 
   const validateForm = () => {
-    // return (
-    //   firstName.length > 0 &&
-    //   lastName.length > 0 &&
-    //   phoneNumber.length > 0 &&
-    //   email.length > 0 &&
-    //   password.length > 0 &&
-    //   password === confirmPassword
-    // );
-    return true;
+    return (
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      phoneNumber.length > 0 &&
+      email.length > 0 &&
+      password.length > 0 &&
+      password === confirmPassword
+    );
   };
 
   const handleSubmit = async (event) => {
@@ -45,10 +45,13 @@ const SignUp = () => {
 
   const handleConfirmationSubmit = async (event) => {
     event.preventDefault();
+
+    UtilCtx.setLoader(true);
+
     try {
       await Auth.confirmSignUp(email, confirmationCode);
       await Auth.signIn(email, password);
-      const data = await API.post("user", "/userdata", {
+      await API.post("user", "/userdata", {
         body: {
           emailId: email,
           firstName: firstName,
@@ -57,10 +60,14 @@ const SignUp = () => {
           profilePhotoS3: "Photo",
         },
       });
+      const userdata = await API.get("user", "/userdata");
+      UserDataCtx.setUserData(userdata);
       UserCtx.setIsLogged(true);
+      UtilCtx.setLoader(false);
       Navigate("/");
     } catch (e) {
-      // alert(e);
+      console.log(e);
+      UtilCtx.setLoader(false);
     }
   };
 

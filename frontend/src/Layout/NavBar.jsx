@@ -1,7 +1,8 @@
-import { Auth } from "aws-amplify";
+import { Auth, Storage } from "aws-amplify";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
+import profile from "../utils/Photo/profile.png";
 
 const NavBar = () => {
   const [homeActive, setHomeActive] = useState(
@@ -11,8 +12,11 @@ const NavBar = () => {
   const [reviewsActive, setReviewsActive] = useState("");
   const [aboutUsActive, setAboutUsActive] = useState("");
   const UserCtx = useContext(Context).user;
-  const UserDataCtx = useContext(Context).userdata;
-  const NavHandle = useRef();
+  const UserDataCtx = useRef(useContext(Context).userdata);
+  const [navHandle, setNavHandle] = useState(false);
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState(
+    UserDataCtx.current.userData.profilePhotoS3
+  );
 
   const Navigate = useNavigate();
 
@@ -39,14 +43,31 @@ const NavBar = () => {
       setAboutUsActive("text-Color2 border-b-2 border-Color3");
     }
 
-    NavHandle.current.style.display = "none";
+    const onLoad = async () => {
+      try {
+        const profilePhotoUrl = await Storage.get(
+          `${UserDataCtx.current.userData.profilePhotoS3}`,
+          {
+            level: "private",
+            region: "us-east-1",
+            bucket:
+              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          }
+        );
+        setProfilePhotoUrl(profilePhotoUrl);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    onLoad();
   }, []);
 
   const DisplayNavHandle = () => {
-    if (NavHandle.current.style.display === "block") {
-      NavHandle.current.style.display = "none";
+    if (navHandle === true) {
+      setNavHandle(false);
     } else {
-      NavHandle.current.style.display = "block";
+      setNavHandle(true);
     }
   };
 
@@ -66,6 +87,8 @@ const NavBar = () => {
     try {
       await Auth.signOut();
       UserCtx.setIsLogged(false);
+      UserDataCtx.setUserData({});
+      Navigate("/");
     } catch (e) {
       console.log(e);
     }
@@ -130,7 +153,7 @@ const NavBar = () => {
               About Us
             </li>
             <li>
-              {UserCtx.isLogged ? (
+              {!UserCtx.isLogged ? (
                 <button
                   className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1"
                   onClick={SignUpNavigation}
@@ -139,38 +162,42 @@ const NavBar = () => {
                 </button>
               ) : (
                 <div
-                  className="bg-Color3 rounded-[50%] w-8 h-8 relative cursor-pointer"
+                  className="bg-Color3 rounded-[50%] w-12 h-12 relative cursor-pointer"
                   onClick={DisplayNavHandle}
                 >
-                  <ul
-                    ref={NavHandle}
-                    className="absolute flex flex-col items-center justify-center border-black top-8 right-2 text-Color1"
-                  >
-                    <li
-                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                      onClick={ProfileHandler}
-                    >
-                      Dashboard
-                    </li>
-                    <li
-                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                      onClick={MyCoursesHandler}
-                    >
-                      My Courses
-                    </li>
-                    <li
-                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                      onClick={MyVideosHandler}
-                    >
-                      My Videos
-                    </li>
-                    <li
-                      className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
-                      onClick={LogOutHandler}
-                    >
-                      Log Out
-                    </li>
-                  </ul>
+                  <img
+                    src={profilePhotoUrl || profile}
+                    alt="profile"
+                    className="w-12 h-12 rounded-[50%]"
+                  />
+                  {navHandle && (
+                    <ul className="absolute flex flex-col items-center justify-center border-black top-12 right-3 text-Color1">
+                      <li
+                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                        onClick={ProfileHandler}
+                      >
+                        Dashboard
+                      </li>
+                      <li
+                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                        onClick={MyCoursesHandler}
+                      >
+                        My Courses
+                      </li>
+                      <li
+                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                        onClick={MyVideosHandler}
+                      >
+                        My Videos
+                      </li>
+                      <li
+                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
+                        onClick={LogOutHandler}
+                      >
+                        Log Out
+                      </li>
+                    </ul>
+                  )}
                 </div>
               )}
             </li>

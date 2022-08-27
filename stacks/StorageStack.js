@@ -35,6 +35,15 @@ export function StorageStack({ stack, app }) {
     primaryIndex: { partitionKey: "page", sortKey: "videoId" },
   });
 
+  //Review
+  const ReviewTable = new Table(stack, "Review", {
+    fields: {
+      page: "number",
+      reviewId: "string",
+    },
+    primaryIndex: { partitionKey: "page", sortKey: "reviewId" },
+  });
+
   //Hard Coded MemberShip Tier
   const MembershipTable = new Table(stack, "Membership", {
     fields: {
@@ -57,6 +66,7 @@ export function StorageStack({ stack, app }) {
     WorkoutTable,
     VideoTable,
     CourseTable,
+    ReviewTable,
     MembershipTable,
     OrderTable,
   };
