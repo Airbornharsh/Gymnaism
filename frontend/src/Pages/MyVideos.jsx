@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { v1 as uuidv1 } from "uuid";
 import VideoElement from "../Components/MyVideos/VideoElement";
 import Context from "../Context/Context";
@@ -7,8 +6,6 @@ import NavBar from "../Layout/NavBar";
 
 const MyVideos = () => {
   const UserDataCtx = useContext(Context).userdata;
-
-  const Navigate = useNavigate();
 
   return (
     <div className="bg-Color5 min-h-[100vh]">

@@ -23,7 +23,7 @@ const Workouts = () => {
     <div className="flex flex-col items-center justify-center pt-[6rem] pb-24">
       <h3 className="text-[3rem] mb-[4rem] font-semibold">Workouts</h3>
       <ul className="flex flex-wrap justify-start w-[90vw] max-w-[75rem] items-end bg-Color6 px-8">
-        {/* {workouts.map((workout) => {
+        {workouts.map((workout) => {
           return (
             <li
               key={workout.videoId}
@@ -43,7 +43,7 @@ const Workouts = () => {
               </button>
             </li>
           );
-        })} */}
+        })}
         <li className="bg-Color4 w-[12rem] h-[13.6rem] shadow-md flex flex-col  items-center relative mb-16 mx-4 mt-12">
           <img src={pic} alt="workout" className="pt-2 h-14" />
           <div className="pt-2 text-Color5">

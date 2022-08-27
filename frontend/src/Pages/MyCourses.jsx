@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { v1 as uuidv1 } from "uuid";
 import CourseElement from "../Components/MyCourses/CourseElement";
 import Context from "../Context/Context";
@@ -8,7 +7,6 @@ import NavBar from "../Layout/NavBar";
 const MyCourses = () => {
   const UserDataCtx = useContext(Context).userdata;
 
-  const Navigate = useNavigate();
 
   return (
     <div>

@@ -1,30 +1,28 @@
 import { API } from "aws-amplify";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v1 as uuid1 } from "uuid";
-import Context from "../../Context/Context";
 import pic from "../../utils/Photo/videoCheck.jpg";
 
 const VideoElement = (props) => {
   const [videoData, setVideoData] = useState({ name: "Fat" });
-  const UtilCtx = useContext(Context).util;
 
   const Navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const done = async () => {
-  //     try {
-  //       const data = await API.get(
-  //         "user",
-  //         `/membership/video/${props.videoId}`
-  //       );
-  //       console.log(data);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   done();
-  // }, [props.videoId]);
+  useEffect(() => {
+    const done = async () => {
+      try {
+        const data = await API.get(
+          "user",
+          `/membership/video/${props.videoId}`
+        );
+        setVideoData(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    done();
+  }, [props.videoId]);
 
   return (
     <li
@@ -43,7 +41,7 @@ const VideoElement = (props) => {
       <button
         className="px-5 py-[0.25rem] rounded-md  bg-Color1 text-Color5 mb-3"
         onClick={async () => {
-          Navigate(`/myvideos/${`video1`}`);
+          Navigate(`/myvideos/${props.videoId}`);
         }}
       >
         Watch
