@@ -16,10 +16,8 @@ const EditDashboard = () => {
   const [phoneNumber, setPhoneNumber] = useState(
     UserDataCtx.current.userData.phoneNumber
   );
-  const [gender, setGender] = useState("Male");
-  const [address, setAddress] = useState(
-    "611 N 2nd St,Philadelphia, Pennsylvania,United States"
-  );
+  const [gender, setGender] = useState(UserDataCtx.current.userData.gender);
+  const [address, setAddress] = useState(UserDataCtx.current.userData.address);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState(
     UserDataCtx.current.userData.profilePhotoS3
   );
@@ -58,25 +56,13 @@ const EditDashboard = () => {
     UtilCtx.current.setLoader(true);
 
     try {
-      const filename = `${Date.now()}-${file.current.name}`;
-      const profilePhotoS3 = file.current
-        ? await Storage.put(`${filename}`, file.current, {
-            level: "private",
-            region: "us-east-1",
-            bucket:
-              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
-          })
-        : null;
-      await API.put("user", "/userdata/profilephoto", {
-        body: {
-          profilePhotoS3: profilePhotoS3.key,
-        },
-      });
       const data = await API.put("user", "/userdata/basic", {
         body: {
           firstName: firstName,
           lastName: lastName,
           phoneNumber: phoneNumber,
+          gender: gender,
+          address: address,
         },
       });
       console.log(data);
@@ -96,10 +82,31 @@ const EditDashboard = () => {
               type="file"
               ref={file}
               className="cursor-pointer w-[1rem] h-[1rem] absolute z-20 opacity-0"
-              onChange={(event) => {
+              onChange={async (event) => {
+                UtilCtx.current.setLoader(true);
+
                 file.current = event.target.files[0];
                 setProfilePhotoUrl(URL.createObjectURL(file.current));
-                // setProfilePhotoUrl(file.current);
+                const filename = `${Date.now()}-${file.current.name}`;
+                try {
+                  const profilePhotoS3 = file.current
+                    ? await Storage.put(`${filename}`, file.current, {
+                        level: "private",
+                        region: "us-east-1",
+                        bucket:
+                          "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+                      })
+                    : null;
+                  await API.put("user", "/userdata/profilephoto", {
+                    body: {
+                      profilePhotoS3: profilePhotoS3.key,
+                    },
+                  });
+                  UtilCtx.current.setLoader(false);
+                } catch (e) {
+                  console.log(e);
+                  UtilCtx.current.setLoader(false);
+                }
               }}
             />
             <BsFillPencilFill color="#46AF72" />

@@ -16,7 +16,7 @@ export const main = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result),
+      body: JSON.stringify(result.Items),
       };
       
   } catch (e) {

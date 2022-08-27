@@ -54,6 +54,9 @@ export function ApiStack({ stack, app }) {
       //course Data
       "GET /membership/video/{id}": "functions/membership/video/get.main",
       "GET /membership/course/{id}": "functions/membership/course/get.main",
+
+      //Review data
+      "POST /review": "functions/userdata/createreview.main",
     },
   });
 
@@ -83,7 +86,6 @@ export function ApiStack({ stack, app }) {
 
       //Reviews
       "GET /reviews": "functions/anyone/reviews/list.main",
-
     },
   });
 

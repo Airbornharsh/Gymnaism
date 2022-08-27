@@ -75,6 +75,10 @@ const NavBar = () => {
     Navigate(`/dashboard`);
   };
 
+  const ChangeEmailHandler = () => {
+    Navigate("/changeemail");
+  };
+
   const MyCoursesHandler = () => {
     Navigate("/mycourses");
   };
@@ -177,6 +181,12 @@ const NavBar = () => {
                         onClick={ProfileHandler}
                       >
                         Dashboard
+                      </li>
+                      <li
+                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                        onClick={ChangeEmailHandler}
+                      >
+                        Change Email
                       </li>
                       <li
                         className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"

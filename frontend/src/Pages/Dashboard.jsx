@@ -67,7 +67,7 @@ const Dashboard = () => {
           <li className="flex mt-2">
             <p className="text-Color4">
               <b className="mr-2 text-Color1">Gender:</b>
-              Male
+              {UserDataCtx.current.userData.gender}
             </p>
           </li>
           <li className="flex mt-2">
@@ -85,7 +85,7 @@ const Dashboard = () => {
           <li className="flex mt-2">
             <b className="text-Color1">Address:</b>
             <p className="ml-2 text-Color4">
-              611 N 2nd St,Philadelphia, Pennsylvania,United States
+              {UserDataCtx.current.userData.address}
             </p>
           </li>
           <li className="flex mt-2">

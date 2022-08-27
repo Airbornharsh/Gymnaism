@@ -11,11 +11,13 @@ export const main = async (event) => {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
     },
     UpdateExpression:
-      "SET phoneNumber = :phoneNumber,firstName = :firstName,lastName = :lastName",
+      "SET phoneNumber = :phoneNumber,firstName = :firstName,lastName = :lastName,gender = :gender,address = :address",
     ExpressionAttributeValues: {
       ":firstName": data.firstName,
       ":lastName": data.lastName,
       ":phoneNumber": data.phoneNumber,
+      ":gender": data.gender,
+      ":address": data.address,
     },
     ReturnValues: "ALL_NEW",
   };

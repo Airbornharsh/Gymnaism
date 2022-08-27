@@ -23,6 +23,7 @@
     "services"
   ],
   "dependencies": {
-    "aws-sdk": "^2.1197.0"
+    "aws-sdk": "^2.1197.0",
+    "uuid": "^8.3.2"
   }
 }
