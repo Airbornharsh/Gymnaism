@@ -10,7 +10,7 @@ const MyCourses = () => {
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col items-center justify-center pt-[6rem]">
+      <div className="flex flex-col items-center justify-start pt-[6rem] bg-Color5 min-h-screen">
         <h3 className="text-[3rem] mb-[4rem] font-semibold">My Courses</h3>
         <ul className="flex flex-wrap justify-around w-[100vw] max-w-[80rem] items-end">
           {(UserDataCtx.userData.courses || []).map((courseId) => {

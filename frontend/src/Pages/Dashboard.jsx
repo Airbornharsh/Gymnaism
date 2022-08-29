@@ -48,9 +48,13 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-Color1">
-      <img src={dashboard} alt="dashboard" className="w-[38rem]" />
-      <div className="h-[30rem] w-[24rem] bg-Color5 rounded-lg shadow-2xl mx-[10rem] flex flex-col items-center relative">
+    <div className="flex items-center justify-center w-screen h-screen bg-Color1 ">
+      <img
+        src={dashboard}
+        alt="dashboard"
+        className="w-[38rem] max1100:hidden"
+      />
+      <div className="min-h-[30rem] w-[24rem] bg-Color5 rounded-lg shadow-2xl mx-[5rem] flex flex-col items-center relative max500:mx-5 pb-16">
         <img
           src={profilePhotoUrl}
           alt="profile"
@@ -81,27 +85,27 @@ const Dashboard = () => {
               {UserDataCtx.current.userData.phoneNumber}
             </p>
           </li>
-          <li className="flex mt-2">
-            <b className="text-Color1">Email Id:</b>
-            <p className="ml-2 text-Color4">
+          <li className="flex mt-2 w-[90%] overflow-auto">
+            <p className=" text-Color4">
+              <b className="text-Color1">Email Id: </b>
               {UserDataCtx.current.userData.emailId}
             </p>
           </li>
           <li className="flex mt-2">
-            <b className="text-Color1">Address:</b>
-            <p className="ml-2 text-Color4">
+            <p className=" text-Color4">
+              <b className="text-Color1">Address: </b>
               {UserDataCtx.current.userData.address}
             </p>
           </li>
           <li className="flex mt-2">
-            <b className="text-Color1">Membership:</b>
-            <p className="ml-2 text-Color4">
+            <p className="text-Color4">
+              <b className="text-Color1">Membership: </b>
               {UserDataCtx.current.userData.membershipId}
             </p>
           </li>
           <li className="flex mt-2">
-            <b className="text-Color1">Joined At:</b>
-            <p className="ml-2 text-Color4">
+            <p className=" text-Color4">
+              <b className="text-Color1">Joined At: </b>
               {new Date(
                 UserDataCtx.current.userData.createdAt
               ).toLocaleDateString("en-us", {

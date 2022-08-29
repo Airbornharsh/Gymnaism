@@ -111,8 +111,48 @@ const EditDashboard = () => {
     }
   };
 
+  const UploadProfile = async (event) => {
+    UtilCtx.current.setLoader(true);
+
+    file.current = event.target.files[0];
+    setProfilePhotoUrl(URL.createObjectURL(file.current));
+    const filename = `${Date.now()}-${file.current.name}`;
+
+    try {
+      const profilePhotoS3 = file.current
+        ? await Storage.put(`${filename}`, file.current, {
+            level: "private",
+            region: "us-east-1",
+            bucket:
+              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          })
+        : null;
+
+      await API.put("user", "/userdata/profilephoto", {
+        body: {
+          profilePhotoS3: profilePhotoS3.key,
+        },
+      });
+
+      if (UserDataCtx.current.userData.profilePhotoS3) {
+        await Storage.remove(UserDataCtx.current.userData.profilePhotoS3, {
+          level: "private",
+          region: "us-east-1",
+          bucket: "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+        });
+      }
+      const TempData = UserDataCtx.current.userData;
+      TempData.profilePhotoS3 = profilePhotoS3.key;
+      UserDataCtx.current.setUserData(TempData);
+      UtilCtx.current.setLoader(false);
+    } catch (e) {
+      console.log(e);
+      UtilCtx.current.setLoader(false);
+    }
+  };
+
   return (
-    <div className="flex justify-center w-screen h-screen bg-Color1">
+    <div className="flex justify-center w-screen min-h-screen bg-Color1">
       <form className="w-[80vw] max-w-[70rem] mt-[10rem] flex flex-col items-center">
         <span className="relative">
           <span className="absolute right-0 z-30 cursor-pointer">
@@ -120,49 +160,7 @@ const EditDashboard = () => {
               type="file"
               ref={file}
               className="cursor-pointer w-[1rem] h-[1rem] absolute z-20 opacity-0"
-              onChange={async (event) => {
-                UtilCtx.current.setLoader(true);
-
-                file.current = event.target.files[0];
-                setProfilePhotoUrl(URL.createObjectURL(file.current));
-                const filename = `${Date.now()}-${file.current.name}`;
-
-                try {
-                  const profilePhotoS3 = file.current
-                    ? await Storage.put(`${filename}`, file.current, {
-                        level: "private",
-                        region: "us-east-1",
-                        bucket:
-                          "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
-                      })
-                    : null;
-
-                  await API.put("user", "/userdata/profilephoto", {
-                    body: {
-                      profilePhotoS3: profilePhotoS3.key,
-                    },
-                  });
-
-                  if (UserDataCtx.current.userData.profilePhotoS3) {
-                    await Storage.remove(
-                      UserDataCtx.current.userData.profilePhotoS3,
-                      {
-                        level: "private",
-                        region: "us-east-1",
-                        bucket:
-                          "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
-                      }
-                    );
-                  }
-                  const TempData = UserDataCtx.current.userData;
-                  TempData.profilePhotoS3 = profilePhotoS3.key;
-                  UserDataCtx.current.setUserData(TempData);
-                  UtilCtx.current.setLoader(false);
-                } catch (e) {
-                  console.log(e);
-                  UtilCtx.current.setLoader(false);
-                }
-              }}
+              onChange={UploadProfile}
             />
             <BsFillPencilFill color="#46AF72" />
           </span>
@@ -175,7 +173,7 @@ const EditDashboard = () => {
         </span>
 
         <ul className="flex flex-wrap items-start justify-center">
-          <li className="flex flex-col my-5 mx-7">
+          <li className="flex flex-col my-5 mx-7 ">
             <label className="text-Color3 ">First Name</label>
             <input
               value={firstName}
@@ -227,7 +225,7 @@ const EditDashboard = () => {
           </li>
         </ul>
         <button
-          className="bg-Color3 py-[0.25rem] px-2 rounded text-center font-semibold text-Color1 w-[5rem] mt-8"
+          className="bg-Color3 py-[0.25rem] px-2 rounded text-center font-semibold text-Color1 w-[5rem] mt-8 mb-12"
           onClick={UpdateHandler}
         >
           Update

@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="bg-Color1 min-h-[calc(100vh-5.5rem)] flex justify-center items-center max1000:flex-col">
-      <img src={pic} alt="tredMill" className="max-w-[30rem] w-[50vw] mr-20 pb-10 max1000:mr-0 max500:w-[80vw]" />
+      <img src={pic} alt="tredMill" className="max-w-[30rem] w-[50vw] mr-20 pb-10 max1000:mr-0 max800:w-[80vw]" />
       <div className="ml-[5rem] pb-10 max1000:m-0 max1000:ml-0">
         <p className="font-medium text-Color2 max400:text-[0.8rem]">TIME TO LEVEL UP THE FITNESS</p>
         <p className="text-Color4 text-[2.8rem] w-[25rem] max400:text-[2rem] max1000:w-[90vw]">

@@ -22,7 +22,7 @@ const Workouts = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-[6rem] pb-24">
       <h3 className="text-[3rem] mb-[4rem] font-semibold">Workouts</h3>
-      <ul className="flex flex-wrap justify-start w-[90vw] max-w-[75rem] items-end bg-Color6 px-8">
+      <ul className="flex flex-wrap justify-center w-[90vw] max-w-[75rem] items-end bg-Color6 px-8">
         {workouts.map((workout) => {
           return (
             <li

@@ -27,7 +27,7 @@ const VideoElement = (props) => {
   return (
     <li
       key={uuid1()}
-      className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4"
+      className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4 hover:scale-105 hover:shadow-2xl"
     >
       <div className="flex flex-col items-center justify-start ">
         <img src={pic} alt="vI" className="h-[9rem] object-cover" />

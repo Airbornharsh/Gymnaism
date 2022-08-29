@@ -13,6 +13,7 @@ module.exports = {
         Color6: "#E5E5E5",
       },
       screens: {
+        max1100: { max: "1100px" },
         max1000: { max: "1000px" },
         max800: { max: "800px" },
         max500: { max: "500px" },

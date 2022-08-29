@@ -25,12 +25,12 @@ const Videos = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-[6rem]">
       <h3 className="text-[3rem] mb-[4rem] font-semibold">Videos</h3>
-      <ul className="flex flex-wrap w-[100vw] max-w-[80rem] items-end justify-start">
+      <ul className="flex flex-wrap w-[100vw] max-w-[80rem] items-end justify-center">
         {videos.map((video) => {
           return (
             <li
               key={uuid1()}
-              className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4"
+              className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4 hover:scale-105 hover:shadow-2xl"
             >
               <div className="flex flex-col items-center justify-start ">
                 <img src={pic} alt="vI" className="h-[9rem] object-cover" />

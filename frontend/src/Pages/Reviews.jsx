@@ -67,9 +67,9 @@ const Reviews = () => {
     <div>
       <NavBar />
       <div className="flex items-center bg-Color5 flex-col py-[8rem] min-h-[30rem]">
-        <ul className="flex justify-center w-[50%] relative mb-[8rem]">
+        <ul className="flex justify-center w-[50%] max500:w-[90%] relative mb-[8rem]">
           {reviews && (
-            <li className="w-[80%] max-w-[35rem] h-[20rem] `bg-Color6` shadow-lg p-5 pr-8 relative">
+            <li className="w-[80%] max500:w-[70%] max-w-[35rem] h-[20rem] `bg-Color6` shadow-lg p-5 pr-8 relative">
               <p className="absolute right-3 bottom-3 text-[0.8rem] text-Color4">
                 By {review.name}
               </p>
@@ -90,10 +90,10 @@ const Reviews = () => {
           />
         </ul>
         {UserCtx.isLogged && (
-          <form className="flex flex-col">
+          <form className="flex flex-col mx-4">
             <textarea
               placeholder="Write Your Review Here"
-              className="p-2 w-[10vw] min-w-[30rem] h-[20vh] min-h-[12rem] bg-[#f0f0f0] shadow-2xl rounded-md"
+              className="p-2 w-[9.7vw] min-w-[29rem] h-[20vh] min-h-[12rem] bg-[#f0f0f0] shadow-2xl rounded-md max500:min-w-[70vw]"
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);

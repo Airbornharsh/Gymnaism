@@ -68,10 +68,12 @@ const NavBar = () => {
   }, []);
 
   const DisplayNavHandle = () => {
-    if (navHandle === true) {
-      setNavHandle(false);
-    } else {
-      setNavHandle(true);
+    if (window.innerWidth >= 800) {
+      if (navHandle === true) {
+        setNavHandle(false);
+      } else {
+        setNavHandle(true);
+      }
     }
   };
 
@@ -134,86 +136,131 @@ const NavBar = () => {
           </h2>
           <span className="bg-Color3 ml-7 w-[0.1rem] h-16 max800:h-12 max800:ml-3"></span>
         </div>
-        <div className="mr-8">
+        <div className="mr-2">
           <ul className="flex justify-between items-center text-[1rem] font-semibold w-[60vw] max-w-[45rem] text-Color4 ">
             <li
-              className={`${homeActive} cursor-pointer max800:hidden`}
+              className={`${homeActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3 transition-none`}
               onClick={HomeNavigation}
             >
               Home
             </li>
             <li
-              className={`${featuresActive} cursor-pointer max800:hidden`}
+              className={`${featuresActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
               onClick={FeaturesNavigation}
             >
               Featuress
             </li>
             <li
-              className={`${reviewsActive} cursor-pointer max800:hidden`}
+              className={`${reviewsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
               onClick={ReviewsNavigation}
             >
               Reviews
             </li>
             <li
-              className={`${aboutUsActive} cursor-pointer max800:hidden`}
+              className={`${aboutUsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
               onClick={AboutUsNavigation}
             >
               About Us
             </li>
-            <li >
-              {!UserCtx.isLogged ? (
+            <li>
+              {/* {!UserCtx.isLogged ? (
                 <button
                   className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1  max800:absolute max800:right-4 max800:top-7 "
                   onClick={SignUpNavigation}
                 >
                   Get Started
                 </button>
-              ) : (
-                <div
-                  className="bg-Color3 rounded-[50%] w-12 h-12 relative cursor-pointer max800:absolute max800:right-4 max800:top-7 max800:w-9 max800:h-9"
-                  onClick={DisplayNavHandle}
-                >
-                  <img
-                    src={profilePhotoUrl || profile}
-                    alt="profile"
-                    className="w-12 h-12 rounded-[50%] max800:w-9 max800:h-9"
-                  />
-                  {navHandle && (
-                    <ul className="absolute flex flex-col items-center justify-center border-black top-12 right-3 text-Color1">
-                      <li
-                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                        onClick={ProfileHandler}
-                      >
-                        Dashboard
-                      </li>
-                      <li
-                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                        onClick={ChangeEmailHandler}
-                      >
-                        Change Email
-                      </li>
-                      <li
-                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                        onClick={MyCoursesHandler}
-                      >
-                        My Courses
-                      </li>
-                      <li
-                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
-                        onClick={MyVideosHandler}
-                      >
-                        My Videos
-                      </li>
+              ) : ( */}
+              <div
+                className="bg-Color3 rounded-[50%] w-12 h-12 relative cursor-pointer max800:absolute max800:right-4 max800:top-7 max800:w-9 max800:h-9"
+                onClick={() => {
+                  if (navHandle === true) {
+                    setNavHandle(false);
+                  } else {
+                    setNavHandle(true);
+                  }
+                }}
+                onMouseEnter={DisplayNavHandle}
+                onMouseLeave={DisplayNavHandle}
+              >
+                <img
+                  src={profilePhotoUrl || profile}
+                  alt="profile"
+                  className="w-12 h-12 rounded-[50%] max800:w-9 max800:h-9"
+                />
+
+                {navHandle && (
+                  <ul className="absolute flex flex-col items-center justify-center border-black top-10 right-1 text-Color1 z-30 shadow-[0_0px_10px_0.1px_rgba(7,41,51,0.3)] shadow-Color1">
+                    <li
+                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      onClick={HomeNavigation}
+                    >
+                      Home
+                    </li>
+                    <li
+                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      onClick={FeaturesNavigation}
+                    >
+                      Features
+                    </li>
+                    <li
+                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      onClick={ReviewsNavigation}
+                    >
+                      Reviews
+                    </li>
+                    <li
+                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      onClick={AboutUsNavigation}
+                    >
+                      About Us
+                    </li>
+                    {UserCtx.isLogged ? (
+                      <ul>
+                        <li
+                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          onClick={ProfileHandler}
+                          hidden={UserCtx.isLogged}
+                        >
+                          Dashboard
+                        </li>
+                        <li
+                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          onClick={ChangeEmailHandler}
+                        >
+                          Change Email
+                        </li>
+                        <li
+                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          onClick={MyCoursesHandler}
+                        >
+                          My Courses
+                        </li>
+                        <li
+                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          onClick={MyVideosHandler}
+                        >
+                          My Videos
+                        </li>
+                        <li
+                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
+                          onClick={LogOutHandler}
+                        >
+                          Log Out
+                        </li>
+                      </ul>
+                    ) : (
                       <li
                         className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
-                        onClick={LogOutHandler}
+                        onClick={SignUpNavigation}
                       >
-                        Log Out
+                        Sign Up
                       </li>
-                    </ul>
-                  )}
-                </div>
-              )}
+                    )}
+                  </ul>
+                )}
+              </div>
+              {/* )} */}
             </li>
           </ul>
         </div>

@@ -27,9 +27,9 @@ const CourseElement = (props) => {
   }, [props.courseId]);
 
   return (
-    <li className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4 ">
+    <li className="bg-Color6 w-[14rem] h-[18rem] rounded-lg shadow-xl flex flex-col justify-between items-center relative mb-16 mx-4 hover:scale-105 hover:shadow-2xl">
       {loader ? (
-        <div className="absolute bg-[rgba(0,0,0,0.2)] rounded-lg z-30 flex justify-center items-center w-[14rem] h-[18rem]">
+        <div className="absolute bg-[rgba(0,0,0,0.2)] rounded-lg z-20 flex justify-center items-center w-[14rem] h-[18rem]">
           <span className="loader">
             <AiOutlineLoading3Quarters
               size="5rem"
