@@ -127,56 +127,56 @@ const NavBar = () => {
       <div className="w-[90vw] max-w-[80rem] flex justify-between items-center">
         <div className="flex items-center">
           <h2
-            className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer"
+            className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem]"
             onClick={HomeNavigation}
           >
             GYMNAISM
           </h2>
-          <span className="bg-Color3 ml-7 w-[0.1rem] h-16"></span>
+          <span className="bg-Color3 ml-7 w-[0.1rem] h-16 max800:h-12 max800:ml-3"></span>
         </div>
         <div className="mr-8">
-          <ul className="flex justify-between items-center text-[1rem] font-semibold w-[60vw] max-w-[45rem] text-Color4">
+          <ul className="flex justify-between items-center text-[1rem] font-semibold w-[60vw] max-w-[45rem] text-Color4 ">
             <li
-              className={`${homeActive} cursor-pointer`}
+              className={`${homeActive} cursor-pointer max800:hidden`}
               onClick={HomeNavigation}
             >
               Home
             </li>
             <li
-              className={`${featuresActive} cursor-pointer`}
+              className={`${featuresActive} cursor-pointer max800:hidden`}
               onClick={FeaturesNavigation}
             >
               Featuress
             </li>
             <li
-              className={`${reviewsActive} cursor-pointer`}
+              className={`${reviewsActive} cursor-pointer max800:hidden`}
               onClick={ReviewsNavigation}
             >
               Reviews
             </li>
             <li
-              className={`${aboutUsActive} cursor-pointer`}
+              className={`${aboutUsActive} cursor-pointer max800:hidden`}
               onClick={AboutUsNavigation}
             >
               About Us
             </li>
-            <li>
+            <li >
               {!UserCtx.isLogged ? (
                 <button
-                  className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1"
+                  className="bg-Color3 py-[0.22rem] px-[0.3rem] rounded font-semibold text-Color1  max800:absolute max800:right-4 max800:top-7 "
                   onClick={SignUpNavigation}
                 >
                   Get Started
                 </button>
               ) : (
                 <div
-                  className="bg-Color3 rounded-[50%] w-12 h-12 relative cursor-pointer"
+                  className="bg-Color3 rounded-[50%] w-12 h-12 relative cursor-pointer max800:absolute max800:right-4 max800:top-7 max800:w-9 max800:h-9"
                   onClick={DisplayNavHandle}
                 >
                   <img
                     src={profilePhotoUrl || profile}
                     alt="profile"
-                    className="w-12 h-12 rounded-[50%]"
+                    className="w-12 h-12 rounded-[50%] max800:w-9 max800:h-9"
                   />
                   {navHandle && (
                     <ul className="absolute flex flex-col items-center justify-center border-black top-12 right-3 text-Color1">
