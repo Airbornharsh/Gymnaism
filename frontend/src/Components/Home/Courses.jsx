@@ -6,6 +6,7 @@ import Context from "../../Context/Context";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const UtilCtx = useContext(Context).util;
+  const UserDataCtx = useContext(Context).userdata;
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Courses = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-[6rem]">
       <h3 className="text-[3rem] mb-[4rem] font-semibold">Courses</h3>
-      <ul className="flex flex-wrap justify-around w-[100vw] max-w-[80rem] items-end">
+      <ul className="flex flex-wrap justify-around w-[90vw] max-w-[75rem] items-end">
         {courses.map((course) => {
           return (
             <li
@@ -53,12 +54,32 @@ const Courses = () => {
                   console.log("Started");
                   UtilCtx.setLoader(true);
                   try {
-                    const data = await API.put("user", "/userdata/courses", {
-                      body: {
-                        courseId: course.courseId,
-                      },
-                    });
-                    console.log(data);
+                    const TempData = UserDataCtx.userData;
+                    let i = 0;
+                    console.log(TempData.courses.length);
+                    for (let j = 0; j < TempData.courses.length; j++) {
+                      if (TempData.courses[j] === course.courseId) {
+                        i = 1;
+                      }
+                    }
+
+                    if (i === 0) {
+                      const data = await API.put("user", "/userdata/courses", {
+                        body: {
+                          courseId: course.courseId,
+                        },
+                      });
+                      console.log(data);
+                      const TempCourses = [
+                        ...TempData.courses,
+                        course.courseId,
+                      ];
+                      TempData.courses = TempCourses;
+                      UserDataCtx.setUserData(TempData);
+                    } else {
+                      alert("It is Already Added");
+                    }
+
                     UtilCtx.setLoader(false);
                   } catch (e) {
                     console.log(e);

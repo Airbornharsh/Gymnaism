@@ -18,10 +18,10 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-Color1 h-[calc(100vh-5.5rem)] flex justify-center items-center">
-      <img src={pic} alt="tredMill" className="max-w-[35rem] w-[50vw] mr-20" />
-      <div className="ml-[6rem]">
-        <p className="font-medium text-Color2">TIME TO LEVEL UP THE FITNESS</p>
+    <div className="bg-Color1 min-h-[calc(100vh-5.5rem)] flex justify-center items-center max1000:flex-col">
+      <img src={pic} alt="tredMill" className="max-w-[30rem] w-[50vw] mr-20 pb-10" />
+      <div className="ml-[5rem] pb-10 max1000:m-0">
+        <p className="font-medium text-Color2 ">TIME TO LEVEL UP THE FITNESS</p>
         <p className="text-Color4 text-[2.8rem] w-[25rem]">
           Exercise is the Key to a Healthy Lifestyle
         </p>

@@ -10,7 +10,6 @@ function App() {
   const UtilCtx = useRef(useContext(Context).util);
   const UserDataCtx = useRef(useContext(Context).userdata);
 
-
   useEffect(() => {
     const check = async () => {
       setRender(false);

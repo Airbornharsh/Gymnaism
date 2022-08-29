@@ -38,8 +38,13 @@ const Dashboard = () => {
         UtilCtx.current.setLoader(false);
       }
     };
+    if (UserDataCtx.current.userData.profilePhotoS3) {
+      onLoad();
+    } else if (UserDataCtx.current.userData.profilePhotoUrl) {
+      setProfilePhotoUrl(UserDataCtx.current.userData.profilePhotoUrl);
+    }
 
-    onLoad();
+    UtilCtx.current.setLoader(false);
   }, []);
 
   return (

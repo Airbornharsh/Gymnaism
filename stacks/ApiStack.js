@@ -33,6 +33,7 @@ export function ApiStack({ stack, app }) {
       //user data
       "POST /userdata": "functions/userdata/create.main",
       "GET /userdata": "functions/userdata/get.main",
+      "GET /identityid": "functions/userdata/getidentityid.main",
       "PUT /userdata/emailid": "functions/userdata/updateemailid.main",
       "PUT /userdata/firstname": "functions/userdata/updatefirstname.main",
       "PUT /userdata/lastname": "functions/userdata/updatelastname.main",

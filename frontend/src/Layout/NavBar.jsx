@@ -44,19 +44,23 @@ const NavBar = () => {
     }
 
     const onLoad = async () => {
-      try {
-        const profilePhotoUrl = await Storage.get(
-          `${UserDataCtx.current.userData.profilePhotoS3}`,
-          {
-            level: "private",
-            region: "us-east-1",
-            bucket:
-              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
-          }
-        );
-        setProfilePhotoUrl(profilePhotoUrl);
-      } catch (e) {
-        console.log(e);
+      if (UserDataCtx.current.userData.profilePhotoS3) {
+        try {
+          const profilePhotoUrl = await Storage.get(
+            `${UserDataCtx.current.userData.profilePhotoS3}`,
+            {
+              level: "private",
+              region: "us-east-1",
+              bucket:
+                "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+            }
+          );
+          setProfilePhotoUrl(profilePhotoUrl);
+        } catch (e) {
+          console.log(e);
+        }
+      } else if (UserDataCtx.current.userData.profilePhotoUrl) {
+        setProfilePhotoUrl(UserDataCtx.current.userData.profilePhotoUrl);
       }
     };
 
@@ -120,7 +124,7 @@ const NavBar = () => {
 
   return (
     <div className="bg-Color1 h-[5.5rem] flex justify-center">
-      <div className="w-[100vw] max-w-[90rem] flex justify-between items-center">
+      <div className="w-[90vw] max-w-[80rem] flex justify-between items-center">
         <div className="flex items-center">
           <h2
             className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer"

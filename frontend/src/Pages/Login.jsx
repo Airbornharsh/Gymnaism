@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { API, Auth } from "aws-amplify";
 import Context from "../Context/Context";
 import Return from "../utils/Svgs/Return.svg";
+import GoogleButton from "../Components/Signing/GoogleButton";
+import FacebookButton from "../Components/Signing/FacebookButton";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -47,7 +49,10 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-Color1">
       <div className="min-w-[15rem] rounded-md w-[25rem] max-w-[30rem] z-10">
-        <div className="flex flex-col items-center justify-center mt-12"></div>
+        <div className="flex flex-col items-center justify-center mt-12">
+          <GoogleButton />
+          <FacebookButton />
+        </div>
         <form
           className="flex flex-col items-center pt-3 pb-5"
           onSubmit={handleSubmit}
@@ -83,6 +88,7 @@ const Login = () => {
                 type="password"
                 className="p-2 rounded text-black bg-Color5 w-[20rem] h-10 mb-4"
                 placeholder="Password"
+                autoComplete="true"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);

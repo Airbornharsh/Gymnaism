@@ -57,7 +57,7 @@ const SignUp = () => {
           firstName: firstName,
           lastName: lastName,
           phoneNumber: phoneNumber,
-          profilePhotoS3: "Photo",
+          profilePhotoS3: "",
         },
       });
       const userdata = await API.get("user", "/userdata");
@@ -114,7 +114,6 @@ const SignUp = () => {
                   type="text"
                   className="p-2 text-black rounded bg-Color5 w-[20rem] h-10 mb-4"
                   placeholder="Last Name"
-                  autoComplete="current-password"
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
@@ -133,7 +132,6 @@ const SignUp = () => {
                   type="number"
                   className="p-2 text-black rounded bg-Color5 w-[20rem] h-10 mb-4"
                   placeholder="Phone Number"
-                  autoComplete="current-password"
                   value={phoneNumber}
                   onChange={(e) => {
                     setPhoneNumber(e.target.value);
@@ -152,7 +150,6 @@ const SignUp = () => {
                   type="email"
                   className="p-2 text-black rounded bg-Color5 w-[20rem] h-10 mb-4"
                   placeholder="Email Address"
-                  autoComplete="current-password"
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -169,6 +166,7 @@ const SignUp = () => {
                 <input
                   type="password"
                   className="p-2 rounded text-black bg-Color5 w-[20rem] h-10 mb-4"
+                  autoComplete="true"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => {
@@ -188,6 +186,7 @@ const SignUp = () => {
                   className="p-2 rounded text-black bg-Color5 w-[20rem] h-10 mb-4"
                   placeholder="Password"
                   value={confirmPassword}
+                  autoComplete="true"
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
                   }}

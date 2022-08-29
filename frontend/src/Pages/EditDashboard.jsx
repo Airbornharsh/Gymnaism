@@ -1,4 +1,4 @@
-import { API, Storage } from "aws-amplify";
+import { API, Auth, Storage } from "aws-amplify";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,27 @@ const EditDashboard = () => {
   useEffect(() => {
     UtilCtx.current.setLoader(true);
 
+    const checkNew = async () => {
+      try {
+        const data1 = await Auth.currentSession();
+        console.log(data1);
+        if (data1.idToken.payload.identities[0].providerName === "Google") {
+          const data = await API.post("user", "/userdata", {
+            body: {
+              emailId: data1.idToken.payload.email,
+              firstName: data1.idToken.payload.given_name,
+              lastName: data1.idToken.payload.family_name,
+              profilePhotoUrl: data1.idToken.payload.picture,
+            },
+          });
+
+          UserDataCtx.current.setUserData(data);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
     const onLoad = async () => {
       try {
         const profilePhotoUrl = await Storage.get(
@@ -47,7 +68,17 @@ const EditDashboard = () => {
       }
     };
 
-    onLoad();
+    if (!UserDataCtx.current.userData.emailId) {
+      checkNew();
+    }
+
+    if (UserDataCtx.current.userData.profilePhotoS3) {
+      onLoad();
+    } else if (UserDataCtx.current.userData.profilePhotoUrl) {
+      setProfilePhotoUrl(UserDataCtx.current.userData.profilePhotoUrl);
+    }
+
+    UtilCtx.current.setLoader(false);
   }, []);
 
   const UpdateHandler = async (e) => {
@@ -56,7 +87,7 @@ const EditDashboard = () => {
     UtilCtx.current.setLoader(true);
 
     try {
-      const data = await API.put("user", "/userdata/basic", {
+      await API.put("user", "/userdata/basic", {
         body: {
           firstName: firstName,
           lastName: lastName,
@@ -65,7 +96,14 @@ const EditDashboard = () => {
           address: address,
         },
       });
-      console.log(data);
+      //Saving The Data in Context
+      const TempData = UserDataCtx.current.userData;
+      TempData.firstName = firstName;
+      TempData.lastName = lastName;
+      TempData.phoneNumber = phoneNumber;
+      TempData.gender = gender;
+      TempData.address = address;
+      UserDataCtx.current.setUserData(TempData);
       UtilCtx.current.setLoader(false);
       Navigate("/");
     } catch (e) {
@@ -88,6 +126,7 @@ const EditDashboard = () => {
                 file.current = event.target.files[0];
                 setProfilePhotoUrl(URL.createObjectURL(file.current));
                 const filename = `${Date.now()}-${file.current.name}`;
+
                 try {
                   const profilePhotoS3 = file.current
                     ? await Storage.put(`${filename}`, file.current, {
@@ -97,11 +136,27 @@ const EditDashboard = () => {
                           "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
                       })
                     : null;
+
                   await API.put("user", "/userdata/profilephoto", {
                     body: {
                       profilePhotoS3: profilePhotoS3.key,
                     },
                   });
+
+                  if (UserDataCtx.current.userData.profilePhotoS3) {
+                    await Storage.remove(
+                      UserDataCtx.current.userData.profilePhotoS3,
+                      {
+                        level: "private",
+                        region: "us-east-1",
+                        bucket:
+                          "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+                      }
+                    );
+                  }
+                  const TempData = UserDataCtx.current.userData;
+                  TempData.profilePhotoS3 = profilePhotoS3.key;
+                  UserDataCtx.current.setUserData(TempData);
                   UtilCtx.current.setLoader(false);
                 } catch (e) {
                   console.log(e);

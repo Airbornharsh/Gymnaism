@@ -3,6 +3,7 @@ import { ApiStack } from "./ApiStack";
 import { AuthStack } from "./AuthStack";
 import { FrontendStack } from "./FrontendStack";
 import { MediaStack } from "./MediaStack";
+import { FunctionStack } from "./FunctionStack";
 
 export default function (app) {
   app.setDefaultFunctionProps({
@@ -17,5 +18,6 @@ export default function (app) {
     .stack(MediaStack)
     .stack(ApiStack)
     .stack(AuthStack)
+    .stack(FunctionStack)
     .stack(FrontendStack);
 }

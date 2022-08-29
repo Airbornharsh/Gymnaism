@@ -13,14 +13,16 @@ export const main = async (event) => {
     UpdateExpression:
       "SET phoneNumber = :phoneNumber,firstName = :firstName,lastName = :lastName,gender = :gender,address = :address",
     ExpressionAttributeValues: {
-      ":firstName": data.firstName,
-      ":lastName": data.lastName,
-      ":phoneNumber": data.phoneNumber,
-      ":gender": data.gender,
-      ":address": data.address,
+      ":firstName": data.firstName || null,
+      ":lastName": data.lastName || null,
+      ":phoneNumber": data.phoneNumber || null,
+      ":gender": data.gender || null,
+      ":address": data.address || null,
     },
     ReturnValues: "ALL_NEW",
   };
+
+  console.log(params);
 
   try {
     const result = await dynamoDb.update(params).promise();

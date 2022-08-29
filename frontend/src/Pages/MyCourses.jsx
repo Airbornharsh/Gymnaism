@@ -7,7 +7,6 @@ import NavBar from "../Layout/NavBar";
 const MyCourses = () => {
   const UserDataCtx = useContext(Context).userdata;
 
-
   return (
     <div>
       <NavBar />

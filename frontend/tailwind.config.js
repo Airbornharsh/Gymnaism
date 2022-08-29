@@ -12,6 +12,12 @@ module.exports = {
         Color5: "#DCE1E9",
         Color6: "#E5E5E5",
       },
+      screens: {
+        max1000: { max: "1000px"},
+        max500: { max: "500px" },
+        max300: { max: "300px" },
+        max800: { max: "800px", min: "550px" },
+      },
     },
   },
   plugins: [],

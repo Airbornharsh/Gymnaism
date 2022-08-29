@@ -5,7 +5,7 @@ import { v1 as uuid1 } from "uuid";
 import pic from "../../utils/Photo/videoCheck.jpg";
 
 const VideoElement = (props) => {
-  const [videoData, setVideoData] = useState({ name: "Fat" });
+  const [videoData, setVideoData] = useState({ name: "" });
 
   const Navigate = useNavigate();
 

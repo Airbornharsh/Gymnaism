@@ -7,6 +7,7 @@ import pic from "../../utils/Photo/videoCheck.jpg";
 const Videos = () => {
   const [videos, setVideos] = useState([]);
   const UtilCtx = useContext(Context).util;
+  const UserDataCtx = useContext(Context).userdata;
 
   useEffect(() => {
     const data = async () => {
@@ -45,15 +46,34 @@ const Videos = () => {
                 onClick={async () => {
                   console.log("Started");
                   UtilCtx.setLoader(true);
+
                   try {
-                    const data = await API.put("user", "/userdata/videos", {
-                      body: {
-                        videoId: video.videoId,
-                      },
-                    });
-                    console.log(data);
+                    const TempData = UserDataCtx.userData;
+                    let i = 0;
+                    console.log(TempData.videos.length);
+                    for (let j = 0; j < TempData.videos.length; j++) {
+                      if (TempData.videos[j] === video.videoId) {
+                        i = 1;
+                      }
+                    }
+
+                    if (i === 0) {
+                      const data = await API.put("user", "/userdata/videos", {
+                        body: {
+                          videoId: video.videoId,
+                        },
+                      });
+                      console.log(data);
+                      const TempVideos = [...TempData.videos, video.videoId];
+                      TempData.videos = TempVideos;
+                      UserDataCtx.setUserData(TempData);
+                    } else {
+                      alert("It is Already Added");
+                    }
+
                     UtilCtx.setLoader(false);
                   } catch (e) {
+                    UtilCtx.setLoader(false);
                     console.log(e);
                   }
                 }}
