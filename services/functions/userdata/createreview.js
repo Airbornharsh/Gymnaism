@@ -8,7 +8,7 @@ export async function main(event) {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: "harsh-gym-Review",
+    TableName: "harshairborn-gymnaism-Review",
     Item: {
       page: 1,
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,

@@ -13,7 +13,7 @@ export const main = async (event) => {
     const workouts = [...getData, { courseId: data.workout }];
 
     const params = {
-      TableName: "harsh-gym-User",
+      TableName: "harshairborn-gymnaism-User",
       Key: {
         userId: "12",
       },

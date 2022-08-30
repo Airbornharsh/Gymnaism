@@ -40,7 +40,7 @@ export function AuthStack({ stack, app }) {
 
   const domain = auth.cdk.userPool.addDomain("AuthDomain", {
     cognitoDomain: {
-      domainPrefix: `gymnaism-harsh-auth-domain`,
+      domainPrefix: `gymnaism-harshnew-auth-domain`,
     },
   });
 

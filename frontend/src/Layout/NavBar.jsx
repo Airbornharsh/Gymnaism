@@ -20,27 +20,33 @@ const NavBar = () => {
 
   const Navigate = useNavigate();
 
+  const Active =
+    "BalooDa2Font text-Color2 border-b-2 border-Color3 UpperNav font-medium";
+  const Inactive = "text-Color4";
+  const NavHandleHover =
+    "bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer hover:bg-Color3";
+
   useEffect(() => {
     if (window.location.pathname === "/") {
-      setHomeActive("text-Color2 border-b-2 border-Color3");
-      setFeaturesActive("text-Color4");
-      setReviewsActive("text-Color4");
-      setReviewsActive("text-Color4");
+      setHomeActive(Active);
+      setFeaturesActive(Inactive);
+      setReviewsActive(Inactive);
+      setReviewsActive(Inactive);
     } else if (window.location.pathname === "/features") {
-      setHomeActive("text-Color4");
-      setFeaturesActive("text-Color2 border-b-2 border-Color3");
-      setReviewsActive("text-Color4");
-      setAboutUsActive("text-Color4");
+      setHomeActive(Inactive);
+      setFeaturesActive(Active);
+      setReviewsActive(Inactive);
+      setAboutUsActive(Inactive);
     } else if (window.location.pathname === "/reviews") {
-      setHomeActive("text-Color4");
-      setFeaturesActive("text-Color4");
-      setReviewsActive("text-Color2 border-b-2 border-Color3");
-      setAboutUsActive("text-Color4");
+      setHomeActive(Inactive);
+      setFeaturesActive(Inactive);
+      setReviewsActive(Active);
+      setAboutUsActive(Inactive);
     } else if (window.location.pathname === "/aboutus") {
-      setHomeActive("text-Color4");
-      setFeaturesActive("text-Color4");
-      setReviewsActive("text-Color4");
-      setAboutUsActive("text-Color2 border-b-2 border-Color3");
+      setHomeActive(Inactive);
+      setFeaturesActive(Inactive);
+      setReviewsActive(Inactive);
+      setAboutUsActive(Active);
     }
 
     const onLoad = async () => {
@@ -129,7 +135,7 @@ const NavBar = () => {
       <div className="w-[90vw] max-w-[80rem] flex justify-between items-center">
         <div className="flex items-center">
           <h2
-            className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem]"
+            className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem] NunitoFont"
             onClick={HomeNavigation}
           >
             GYMNAISM
@@ -139,25 +145,25 @@ const NavBar = () => {
         <div className="mr-2">
           <ul className="flex justify-between items-center text-[1rem] font-semibold w-[60vw] max-w-[45rem] text-Color4 ">
             <li
-              className={`${homeActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3 transition-none`}
+              className={`${homeActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3 transition-none `}
               onClick={HomeNavigation}
             >
               Home
             </li>
             <li
-              className={`${featuresActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
+              className={`${featuresActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none `}
               onClick={FeaturesNavigation}
             >
               Featuress
             </li>
             <li
-              className={`${reviewsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
+              className={`${reviewsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none `}
               onClick={ReviewsNavigation}
             >
               Reviews
             </li>
             <li
-              className={`${aboutUsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none`}
+              className={`${aboutUsActive} cursor-pointer max800:hidden hover:text-Color2 hover:border-b-2 hover:border-Color3  transition-none `}
               onClick={AboutUsNavigation}
             >
               About Us
@@ -192,25 +198,25 @@ const NavBar = () => {
                 {navHandle && (
                   <ul className="absolute flex flex-col items-center justify-center border-black top-10 right-1 text-Color1 z-30 shadow-[0_0px_10px_0.1px_rgba(7,41,51,0.3)] shadow-Color1">
                     <li
-                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      className={`hidden max800:flex ${NavHandleHover}`}
                       onClick={HomeNavigation}
                     >
                       Home
                     </li>
                     <li
-                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      className={`hidden max800:flex ${NavHandleHover}`}
                       onClick={FeaturesNavigation}
                     >
                       Features
                     </li>
                     <li
-                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      className={`hidden max800:flex ${NavHandleHover}`}
                       onClick={ReviewsNavigation}
                     >
                       Reviews
                     </li>
                     <li
-                      className={`hidden cursor-pointer bg-Color5 w-[15rem] max800:flex justify-center items-center py-3 border-b-2 border-Color3`}
+                      className={`hidden max800:flex ${NavHandleHover}`}
                       onClick={AboutUsNavigation}
                     >
                       About Us
@@ -218,32 +224,32 @@ const NavBar = () => {
                     {UserCtx.isLogged ? (
                       <ul>
                         <li
-                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          className={`${NavHandleHover}`}
                           onClick={ProfileHandler}
                           hidden={UserCtx.isLogged}
                         >
                           Dashboard
                         </li>
                         <li
-                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          className={`${NavHandleHover}`}
                           onClick={ChangeEmailHandler}
                         >
                           Change Email
                         </li>
                         <li
-                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          className={`${NavHandleHover}`}
                           onClick={MyCoursesHandler}
                         >
                           My Courses
                         </li>
                         <li
-                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 border-b-2 border-Color3 cursor-pointer"
+                          className={`${NavHandleHover}`}
                           onClick={MyVideosHandler}
                         >
                           My Videos
                         </li>
                         <li
-                          className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
+                          className={`${NavHandleHover}`}
                           onClick={LogOutHandler}
                         >
                           Log Out

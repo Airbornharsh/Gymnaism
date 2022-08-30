@@ -5,7 +5,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 export const main = async (event) => {
   console.log(event);
   const params = {
-    TableName: "harsh-gym-Membership",
+    TableName: "harshairborn-gymnaism-Membership",
     Key: {
       membershipId: event.pathParameters.id,
     },

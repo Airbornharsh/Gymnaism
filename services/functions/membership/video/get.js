@@ -4,7 +4,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const main = async (event) => {
   const params = {
-    TableName: "harsh-gym-Video",
+    TableName: "harshairborn-gymnaism-Video",
     Key: {
       page: 1,
       videoId: event.pathParameters.id,

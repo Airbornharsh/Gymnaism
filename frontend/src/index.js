@@ -9,12 +9,12 @@ import ContextProvider from "./Context/ContextProvider";
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
-    region: "us-east-1",
-    userPoolId: "us-east-1_0cjDyS2jJ",
-    identityPoolId: "us-east-1:1c6c3156-94ad-47c4-b3f5-59b2c7da1a81",
-    userPoolWebClientId: "29eskqsl1sliu28fjdo6852hqb",
+    region: "ap-south-1",
+    userPoolId: "ap-south-1_W89RAerot",
+    identityPoolId: "ap-south-1:68cc0fa6-065b-4bff-b41b-07751bb8609b",
+    userPoolWebClientId: "6dv4r4ftb68hvgpo0nhialp105",
     oauth: {
-      domain: `${"gymnaism-harsh-auth-domain.auth.us-east-1.amazoncognito.com"}`,
+      domain: `${"gymnaism-harshnew-auth-domain.auth.ap-south-1.amazoncognito.com"}`,
       scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
       redirectSignIn: "http://localhost:3000",
       redirectSignOut: "http://localhost:3000",
@@ -23,22 +23,22 @@ Amplify.configure({
   },
   Storage: [
     {
-      region: "us-east-1",
-      bucket: "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
-      identityPoolId: "us-east-1:1c6c3156-94ad-47c4-b3f5-59b2c7da1a81",
+      region: "ap-south-1",
+      bucket: "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
+      identityPoolId: "ap-south-1:68cc0fa6-065b-4bff-b41b-07751bb8609b",
     },
   ],
   API: {
     endpoints: [
       {
         name: "any",
-        endpoint: "https://x2m5uo1i68.execute-api.us-east-1.amazonaws.com",
-        region: "us-east-1",
+        endpoint: "https://3lc3tm1h9h.execute-api.ap-south-1.amazonaws.com",
+        region: "ap-south-1",
       },
       {
         name: "user",
-        endpoint: "https://pppy3ebfx7.execute-api.us-east-1.amazonaws.com",
-        region: "us-east-1",
+        endpoint: "https://3nfih8ymme.execute-api.ap-south-1.amazonaws.com",
+        region: "ap-south-1",
       },
     ],
   },

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   scroll-behavior: smooth;
   transition: 0.4s;
 }
@@ -40,21 +40,21 @@
   }
 }
 
-.loader{
+.loader {
   transition: none;
   font-weight: 700;
   text-align: center;
   font-size: 40px;
   font-family: Hack, sans-serif;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #000, #fff, #000);
+  background: linear-gradient(90deg, #072933, #fff, #072933);
   letter-spacing: 5px;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-repeat: no-repeat;
   background-size: 80%;
-  animation: shine 5s linear infinite;
+  animation: shine 3s linear infinite;
   position: relative;
 }
 
@@ -65,4 +65,44 @@
   100% {
     background-position-x: 500%;
   }
+}
+
+.UpperNav {
+  transform: translateY(-0.1rem);
+}
+
+@font-face {
+  font-family: "BalooDa2";
+  src: url(./utils/Fonts/BalooDa2/BalooDa2-Medium.ttf);
+}
+
+@font-face {
+  font-family: "BubblegumSans";
+  src: url(./utils/Fonts/BubblegumSans/BubblegumSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "BarlowSemiCondensed";
+  src: url("./utils/Fonts/BarlowSemiCondensed/BarlowSemiCondensed-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("./utils/Fonts/Nunito/Nunito-Regular.ttf");
+}
+
+.BalooDa2Font {
+  font-family: "BalooDa2";
+}
+
+.BubblegumSansFont {
+  font-family: "BubblegumSans";
+}
+
+.BarlowSemiCondensedFont {
+  font-family: "BarlowSemiCondensed";
+}
+
+.NunitoFont {
+  font-family: "Nunito";
 }

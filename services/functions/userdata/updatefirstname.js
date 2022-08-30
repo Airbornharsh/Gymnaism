@@ -6,7 +6,7 @@ export const main = async (event) => {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: "harsh-gym-User",
+    TableName: "harshairborn-gymnaism-User",
     Key: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
     },

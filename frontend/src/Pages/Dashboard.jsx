@@ -1,4 +1,4 @@
-import { Storage } from "aws-amplify";
+import {  Storage } from "aws-amplify";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
@@ -26,9 +26,9 @@ const Dashboard = () => {
           `${UserDataCtx.current.userData.profilePhotoS3}`,
           {
             level: "private",
-            region: "us-east-1",
+            region: "ap-south-1",
             bucket:
-              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+              "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
           }
         );
         setProfilePhotoUrl(profilePhotoUrl);
@@ -38,6 +38,7 @@ const Dashboard = () => {
         UtilCtx.current.setLoader(false);
       }
     };
+
     if (UserDataCtx.current.userData.profilePhotoS3) {
       onLoad();
     } else if (UserDataCtx.current.userData.profilePhotoUrl) {

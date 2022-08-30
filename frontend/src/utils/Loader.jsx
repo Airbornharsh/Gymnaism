@@ -17,7 +17,7 @@ const Loader = () => {
         //     />
         //   </span>
         // </div>
-        <div className="z-40 bg-black">
+        <div className="fixed top-0 left-0 z-40 bg-black">
           <p className="flex items-center justify-center w-screen h-screen loader">
             Please Wait ...
           </p>

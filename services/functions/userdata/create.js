@@ -8,7 +8,7 @@ export async function main(event) {
   console.log(data);
 
   const params = {
-    TableName: "harsh-gym-User",
+    TableName: "harshairborn-gymnaism-User",
     Item: {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
       emailId: data.emailId,

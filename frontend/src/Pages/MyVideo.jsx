@@ -21,8 +21,8 @@ const MyVideo = () => {
         const videoData = await API.get("user", `/membership/video/${videoId}`);
         const videoUrl = await Storage.get(`video/${videoData.videoS3}`, {
           level: "public",
-          region: "us-east-1",
-          bucket: "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          region: "ap-south-1",
+          bucket: "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
         });
         setVideo(videoData);
         setVideoUrl(videoUrl);

@@ -1,4 +1,4 @@
-import { API, Auth, Storage } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -28,36 +28,15 @@ const EditDashboard = () => {
   useEffect(() => {
     UtilCtx.current.setLoader(true);
 
-    const checkNew = async () => {
-      try {
-        const data1 = await Auth.currentSession();
-        console.log(data1);
-        if (data1.idToken.payload.identities[0].providerName === "Google") {
-          const data = await API.post("user", "/userdata", {
-            body: {
-              emailId: data1.idToken.payload.email,
-              firstName: data1.idToken.payload.given_name,
-              lastName: data1.idToken.payload.family_name,
-              profilePhotoUrl: data1.idToken.payload.picture,
-            },
-          });
-
-          UserDataCtx.current.setUserData(data);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
     const onLoad = async () => {
       try {
         const profilePhotoUrl = await Storage.get(
           `${UserDataCtx.current.userData.profilePhotoS3}`,
           {
             level: "private",
-            region: "us-east-1",
+            region: "ap-south-1",
             bucket:
-              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+              "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
           }
         );
         setProfilePhotoUrl(profilePhotoUrl);
@@ -67,10 +46,6 @@ const EditDashboard = () => {
         UtilCtx.current.setLoader(false);
       }
     };
-
-    if (!UserDataCtx.current.userData.emailId) {
-      checkNew();
-    }
 
     if (UserDataCtx.current.userData.profilePhotoS3) {
       onLoad();
@@ -122,9 +97,9 @@ const EditDashboard = () => {
       const profilePhotoS3 = file.current
         ? await Storage.put(`${filename}`, file.current, {
             level: "private",
-            region: "us-east-1",
+            region: "ap-south-1",
             bucket:
-              "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+              "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
           })
         : null;
 
@@ -137,8 +112,9 @@ const EditDashboard = () => {
       if (UserDataCtx.current.userData.profilePhotoS3) {
         await Storage.remove(UserDataCtx.current.userData.profilePhotoS3, {
           level: "private",
-          region: "us-east-1",
-          bucket: "harsh-gym-mediastack-useraccessbucketc6094d94-pqxiz1l38rl2",
+          region: "ap-south-1",
+          bucket:
+            "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
         });
       }
       const TempData = UserDataCtx.current.userData;

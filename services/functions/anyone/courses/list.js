@@ -5,7 +5,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 export const main = async (event) => {
   // console.log(event);
   const params = {
-    TableName: "harsh-gym-Course",
+    TableName: "harshairborn-gymnaism-Course",
     KeyConditionExpression: "page = :page",
     ExpressionAttributeValues: {
       ":page": 1,
