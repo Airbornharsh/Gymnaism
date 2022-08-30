@@ -1,4 +1,5 @@
 import React from "react";
+import { BsTwitter, BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -37,11 +38,27 @@ const Footer = () => {
               {"--->"}
             </button>
           </div>
-          <ul className="flex justify-around w-[16rem]">
-            <li>T</li>
-            <li>F</li>
-            <li>L</li>
-            <li>I</li>
+          <ul className="flex justify-around w-[16rem] mt-4">
+            <li>
+              <a href="https://wwww.twitter.com">
+                <BsTwitter size="1.6rem" color="#46AF72" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com">
+                <BsFacebook size="1.6rem" color="#46AF72" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.Linkedin.com">
+                <BsLinkedin size="1.6rem" color="#46AF72" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com">
+                <BsInstagram size="1.6rem" color="#46AF72" />
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

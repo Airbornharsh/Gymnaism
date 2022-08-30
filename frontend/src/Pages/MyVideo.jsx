@@ -52,7 +52,7 @@ const MyVideo = () => {
         </h2>
         <p className="pl-1 text-Color4">{video.description}</p>
         <button
-          className="py-[0.15rem] px-1 rounded text-center font-semibold text-Color1 w-[5rem] bg-Color6 flex justify-center items-center absolute top-24 left-3"
+          className="py-[0.15rem] px-1 rounded text-center font-semibold text-Color1 w-[5rem] bg-Color6 flex justify-center items-center absolute top-24 left-3 z-30"
           onClick={ReturnNavigation}
         >
           <img src={Return} alt="return" />
