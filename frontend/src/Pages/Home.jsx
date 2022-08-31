@@ -6,7 +6,7 @@ import why2 from "../utils/Svgs/2.svg";
 import why3 from "../utils/Svgs/3.svg";
 import why4 from "../utils/Svgs/4.svg";
 import Membership from "../Components/Home/Membership";
-import Courses from "../Components/Home/Courses";
+// import Courses from "../Components/Home/Courses";
 import Header from "../Components/Home/Header";
 
 const Home = () => {
@@ -64,7 +64,7 @@ const Home = () => {
           </ul>
         </div>
         <Membership />
-        <Courses />
+        {/* <Courses /> */}
       </div>
       <Footer />
     </div>

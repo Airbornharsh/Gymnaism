@@ -19,16 +19,19 @@ const MyVideo = () => {
       UtilCtx.current.setLoader(true);
       try {
         const videoData = await API.get("user", `/membership/video/${videoId}`);
+        console.log("Hii");
         const videoUrl = await Storage.get(`video/${videoData.videoS3}`, {
           level: "public",
           region: "ap-south-1",
-          bucket: "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
+          bucket:
+            "harshairborn-gymnaism-me-useraccessbucketc6094d94-jlf4r2t4q6wz",
         });
         setVideo(videoData);
         setVideoUrl(videoUrl);
         UtilCtx.current.setLoader(false);
       } catch (e) {
         console.log(e);
+        UtilCtx.current.setLoader(false);
       }
     };
 

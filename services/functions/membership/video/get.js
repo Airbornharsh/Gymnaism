@@ -13,6 +13,7 @@ export const main = async (event) => {
 
   try {
     const result = await dynamoDb.get(params).promise();
+    // console.log(result);
 
     return {
       statusCode: 200,

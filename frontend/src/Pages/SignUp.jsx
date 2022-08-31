@@ -233,7 +233,7 @@ const SignUp = () => {
                 <input
                   type="tel"
                   className="p-2 rounded text-black bg-Color6 w-[20rem] h-10 mb-4"
-                  placeholder="Confirm Password"
+                  placeholder="Write The Code Here"
                   value={confirmationCode}
                   onChange={(e) => {
                     setConfirmationCode(e.target.value);

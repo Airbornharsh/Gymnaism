@@ -2,7 +2,7 @@ import React from "react";
 
 const Membership = () => {
   return (
-    <div className="flex flex-col items-center justify-center pt-[6rem] ">
+    <div className="flex flex-col items-center justify-center py-[6rem] ">
       <h3 className="text-[3rem] mb-[5rem] font-semibold">MemberShip</h3>
       <ul className="flex flex-wrap justify-around w-[90vw] max-w-[75rem] items-end">
         <li className="bg-Color1 h-[20.5rem] flex flex-col justify-between rounded-xl shadow-2xl items-center py-4 px-14 w-[18rem] overflow-hidden mb-6 mx-4">
