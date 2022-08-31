@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";
 import profile from "../utils/Photo/profile.png";
+// import Logo from "../utils/Photo/Logo.png";
 
 const NavBar = () => {
   const [homeActive, setHomeActive] = useState(
@@ -103,7 +104,7 @@ const NavBar = () => {
     try {
       await Auth.signOut();
       UserCtx.setIsLogged(false);
-      UserDataCtx.setUserData({});
+      UserDataCtx.current.setUserData({});
       Navigate("/");
     } catch (e) {
       console.log(e);
@@ -134,13 +135,13 @@ const NavBar = () => {
     <div className="bg-Color1 h-[5.5rem] flex justify-center">
       <div className="w-[90vw] max-w-[80rem] flex justify-between items-center">
         <div className="flex items-center">
-          <h2
-            className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem] NunitoFont"
-            onClick={HomeNavigation}
-          >
-            GYMNAISM
-          </h2>
-          <span className="bg-Color3 ml-7 w-[0.1rem] h-16 max800:h-12 max800:ml-3"></span>
+          <div className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem] NunitoFont flex items-center">
+            <h2 onClick={HomeNavigation} className="max400:hidden">
+              GYMNAISM
+            </h2>
+            {/* <img src={Logo} alt="Logo" className="h-8  ml-2" /> */}
+            <span className="bg-Color3 ml-7 w-[0.1rem] h-16 max800:h-12 max800:ml-3  max400:hidden"></span>
+          </div>
         </div>
         <div className="mr-2">
           <ul className="flex justify-between items-center text-[1rem] font-semibold w-[60vw] max-w-[45rem] text-Color4 ">
@@ -257,7 +258,7 @@ const NavBar = () => {
                       </ul>
                     ) : (
                       <li
-                        className="bg-Color5 w-[15rem] flex justify-center items-center py-3 "
+                        className={`${NavHandleHover}`}
                         onClick={SignUpNavigation}
                       >
                         Sign Up
@@ -266,7 +267,6 @@ const NavBar = () => {
                   </ul>
                 )}
               </div>
-              {/* )} */}
             </li>
           </ul>
         </div>

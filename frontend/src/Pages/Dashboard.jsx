@@ -1,4 +1,4 @@
-import {  Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/Context";

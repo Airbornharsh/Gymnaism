@@ -12,6 +12,7 @@ const FacebookButton = () => {
 
     try {
       const response = await Auth.federatedSignIn({ provider: "Facebook" });
+      // const response = await Auth.federatedSignIn({ provider: "" });
       console.log(response);
       UtilCtx.setLoader(false);
       UserCtx.setIsLogged(true);

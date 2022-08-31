@@ -12,7 +12,7 @@ export function AuthStack({ stack, app }) {
   const auth = new Auth(stack, "Auth", {
     login: ["email", "phone"],
     identityPoolFederation: {
-      facebook: { appId: "1344839269381767" },
+      facebook: { appId: "1276727886424978" },
       google: {
         clientId:
           "536867957703-5olv5ulcgulb87duf9f2b7opioh1vvrn.apps.googleusercontent.com",
@@ -28,10 +28,12 @@ export function AuthStack({ stack, app }) {
           callbackUrls: [
             "https://gymnaism.netlify.app",
             "http://localhost:3000",
+            "https://gymnaism-harshnew-auth-domain.auth.ap-south-1.amazoncognito.com",
           ],
           logoutUrls: [
             "https://gymnaism.netlify.app",
             "http://localhost:3000",
+            "https://gymnaism-harshnew-auth-domain.auth.ap-south-1.amazoncognito.com",
           ],
         },
       },
@@ -54,7 +56,7 @@ export function AuthStack({ stack, app }) {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       userPool: auth.cdk.userPool,
-      scopes: ["profile", "email", "openid"],
+      scopes: ["profile", "email", "openid", "public_profile"],
       attributeMapping: {
         email: cognito.ProviderAttribute.GOOGLE_EMAIL,
         givenName: cognito.ProviderAttribute.GOOGLE_GIVEN_NAME,
@@ -72,10 +74,12 @@ export function AuthStack({ stack, app }) {
       clientId: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       userPool: auth.cdk.userPool,
-      scopes: ["profile", "email", "openid"],
+      scopes: ["profile", "email", "openid", "public_profile"],
       attributeMapping: {
         email: cognito.ProviderAttribute.FACEBOOK_EMAIL,
         givenName: cognito.ProviderAttribute.FACEBOOK_NAME,
+        familyName: cognito.ProviderAttribute.FACEBOOK_LAST_NAME,
+        gender: cognito.ProviderAttribute.FACEBOOK_GENDER,
       },
     }
   );

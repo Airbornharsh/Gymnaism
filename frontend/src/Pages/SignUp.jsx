@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { API, Auth } from "aws-amplify";
 import Context from "../Context/Context";
 import Return from "../utils/Svgs/Return.svg";
+import SignUpSvg from "../utils/Svgs/SignUp.png";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -257,9 +258,10 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-Color1">
+      <img src={SignUpSvg} alt="signUp" className="w-[38rem] mr-20 max1100:hidden"/>
       {!newUser ? renderForm() : renderConfirmationForm()}
       <button
-        className="py-[0.15rem] px-1 rounded text-center font-semibold text-Color1 w-[5rem] bg-Color6 flex justify-center items-center absolute top-3 left-3"
+        className="py-[0.15rem] px -1 rounded text-center font-semibold text-Color1 w-[5rem] bg-Color6 flex justify-center items-center absolute top-3 left-3"
         onClick={ReturnNavigation}
       >
         <img src={Return} alt="return" />
