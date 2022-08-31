@@ -15,7 +15,7 @@ Amplify.configure({
     userPoolWebClientId: "6dv4r4ftb68hvgpo0nhialp105",
     oauth: {
       domain: `${"gymnaism-harshnew-auth-domain.auth.ap-south-1.amazoncognito.com"}`,
-      scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
+      scope: ["email", "profile", "openid"],
       // redirectSignIn: "http://localhost:3000",
       // redirectSignOut: "http://localhost:3000",
       redirectSignIn: "https://gymnaism.netlify.app",
