@@ -1,4 +1,4 @@
-import { API, Storage } from "aws-amplify";
+import { API, Auth, Storage } from "aws-amplify";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -46,6 +46,32 @@ const EditDashboard = () => {
         UtilCtx.current.setLoader(false);
       }
     };
+
+    const checkNew = async () => {
+      try {
+        const data1 = await Auth.currentSession();
+        console.log(data1);
+        if (data1.idToken.payload.identities[0].providerName === "Google") {
+          console.log("Started");
+          const data = await API.post("user", "/userdata", {
+            body: {
+              emailId: data1.idToken.payload.email,
+              firstName: data1.idToken.payload.given_name,
+              lastName: data1.idToken.payload.family_name,
+              profilePhotoUrl: data1.idToken.payload.picture,
+            },
+          });
+
+          UserDataCtx.current.setUserData(data);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    if (!UserDataCtx.current.userData.emailId) {
+      checkNew();
+    }
 
     if (UserDataCtx.current.userData.profilePhotoS3) {
       onLoad();

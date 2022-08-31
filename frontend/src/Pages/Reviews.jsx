@@ -6,8 +6,8 @@ import Footer from "../Layout/Footer";
 import NavBar from "../Layout/NavBar";
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState();
-  const [review, setReview] = useState();
+  const [reviews, setReviews] = useState([{}]);
+  const [review, setReview] = useState({});
   const [active, setActive] = useState(0);
   const [description, setDescription] = useState("");
   const UserCtx = useContext(Context).user;
@@ -17,6 +17,7 @@ const Reviews = () => {
     const onLoad = async () => {
       try {
         const data = await API.get("any", "/reviews");
+        console.log(data);
         setReviews(data);
         setReview(data[0]);
       } catch (e) {
