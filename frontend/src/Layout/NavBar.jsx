@@ -136,10 +136,10 @@ const NavBar = () => {
       <div className="w-[90vw] max-w-[80rem] flex justify-between items-center">
         <div className="flex items-center">
           <div className="text-Color2 text-[1.5rem] text-center ml-8 cursor-pointer max800:ml-2 max800:text-[1.2rem] NunitoFont flex items-center">
-            <h2 onClick={HomeNavigation} className="max400:hidden">
+            <h2 onClick={HomeNavigation} className="">
               GYMNAISM
             </h2>
-            {/* <img src={Logo} alt="Logo" className="h-8  ml-2" /> */}
+            {/* <img src={Logo} alt="Logo" className="h-8 ml-2" /> */}
             <span className="bg-Color3 ml-7 w-[0.1rem] h-16 max800:h-12 max800:ml-3  max400:hidden"></span>
           </div>
         </div>
